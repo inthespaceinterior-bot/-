@@ -20,9 +20,9 @@
   <div class="wrap">
     <a class="brand" href="#top"><b>THE GWANGAN</b><span>Busan · Gwangalli</span></a>
     <nav class="nav">
-      <a href="#about">숙소 소개</a>
+      <a href="#booking">예약·요금</a>
       <a href="#gallery">사진</a>
-      <a href="#rates">요금</a>
+      <a href="#about">숙소 소개</a>
       <a href="#reviews">후기</a>
       <a href="#location">위치·이용안내</a>
     </nav>
@@ -40,12 +40,12 @@
 <!-- 모바일 전용 카테고리 탭 (헤더 바로 아래, 가로 스크롤) -->
 <nav class="mnav" aria-label="Sections">
   <div class="wrap">
-    <a href="#about">소개</a>
-    <a href="#gallery">사진</a>
+    <a href="#booking" class="mnav-book">예약</a>
     <a href="#rates">요금</a>
+    <a href="#gallery">사진</a>
+    <a href="#about">소개</a>
     <a href="#reviews">후기</a>
     <a href="#location">위치</a>
-    <a href="#booking" class="mnav-book">예약</a>
   </div>
 </nav>
 
@@ -78,6 +78,67 @@
 </div>
 
 <main id="top">
+
+<section class="section" id="booking" style="background:var(--ivory)">
+  <div class="wrap">
+    <div class="eyebrow">Reservation</div>
+    <h2 style="font-size:32px;margin:10px 0 8px">날짜를 고르면 요금이 바로 계산됩니다</h2>
+    <p id="naverStamp" data-dyn style="color:var(--muted);font-size:13.5px;margin:0 0 20px">네이버 예약 달력과 동기화 중…</p>
+    <div class="book-grid">
+      <div>
+        <div class="cal-toolbar">
+          <div class="mon" id="calTitle" data-dyn>2026년 11월</div>
+          <div class="cal-nav">
+            <button onclick="shiftMonth(-1)" aria-label="이전 달">‹</button>
+            <button onclick="shiftMonth(1)" aria-label="다음 달">›</button>
+          </div>
+        </div>
+        <div class="cal-months">
+          <div class="cal" id="cal1" data-dyn></div>
+          <div class="cal" id="cal2" data-dyn></div>
+        </div>
+        <div class="legend">
+          <span><i class="l-open"></i>예약 가능</span>
+          <span><i class="l-sel"></i>선택</span>
+          <span><i class="l-off"></i>마감 · 판매중지</span>
+          <span>숫자 아래는 1박 요금</span>
+        </div>
+        <div class="sel-line">
+          <div><span>체크인</span><b id="selIn" data-dyn>—</b></div>
+          <div><span>체크아웃</span><b id="selOut" data-dyn>—</b></div>
+          <div><span>숙박</span><b id="selNights" data-dyn>—</b></div>
+        </div>
+        <div style="margin-top:18px;background:#fff;border:1px solid var(--line);padding:8px 20px 14px">
+          <div class="guests-row">
+            <div class="lab">성인 <small>만 13세 이상</small></div>
+            <div class="stepper"><button onclick="stepGuest('adults',-1)">−</button><b id="gAdults">8</b><button onclick="stepGuest('adults',1)">+</button></div>
+          </div>
+          <div class="guests-row">
+            <div class="lab">아동 <small>만 2~12세 · 기준 인원에 포함</small></div>
+            <div class="stepper"><button onclick="stepGuest('children',-1)">−</button><b id="gChildren">0</b><button onclick="stepGuest('children',1)">+</button></div>
+          </div>
+          <div class="guests-row" style="border-bottom:0">
+            <div class="lab">유아 <small>24개월 미만 · 추가 요금 없음</small></div>
+            <div class="stepper"><button onclick="stepGuest('infants',-1)">−</button><b id="gInfants">0</b><button onclick="stepGuest('infants',1)">+</button></div>
+          </div>
+        </div>
+      </div>
+      <aside class="quote" id="quoteCard" data-dyn>
+        <div class="qhead"><b>예약 견적</b><span id="qBadge">날짜 선택</span></div>
+        <div class="qbody" id="qBody">
+          <p style="font-size:13px;color:var(--muted);margin:4px 0 8px">달력에서 체크인·체크아웃 날짜를 선택해 주세요.</p>
+          <div class="qline"><span>1박 요금</span><b>—</b></div>
+        </div>
+        <div class="qtotal"><span id="qTotalLab">총 결제 금액</span><b id="qTotal">—</b></div>
+        <div class="qfx" id="qFx"></div>
+        <div class="qfoot">
+          <button class="btn gold wide" id="qBtn" onclick="startBooking()" disabled>예약하기</button>
+          <p class="qnote">결제 수단: 신용·체크카드 / 해외카드(Visa·Mastercard·JCB) / PayPal / 계좌이체(무통장). 예약 확정 시 해당 날짜는 자동으로 마감됩니다.</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
 
 <section class="hero">
   <div class="hero-media"><img src="assets/p01.webp" alt="더광안 오션뷰 거실"></div>
@@ -237,74 +298,6 @@
   </div>
 </section>
 
-<section class="section" id="booking" style="background:var(--ivory)">
-  <div class="wrap">
-    <div class="eyebrow">Reservation</div>
-    <h2 style="font-size:32px;margin:10px 0 8px">날짜를 고르면 요금이 바로 계산됩니다</h2>
-    <p id="naverStamp" data-dyn style="color:var(--muted);font-size:13.5px;margin:0 0 20px">네이버 예약 달력과 동기화 중…</p>
-    <div class="quickpick">
-      <div class="qp-head">
-        <b>예약 가능한 날짜 바로 선택</b>
-        <span>한 번만 누르면 체크인·체크아웃과 요금이 세팅됩니다</span>
-      </div>
-      <div class="qp-chips" id="qpChips" data-dyn></div>
-      <div class="qp-note">마감·차단된 날짜는 자동으로 빠집니다 · 실제 예약 가능 여부는 서버와 실시간으로 맞춰집니다</div>
-    </div>
-    <div class="book-grid">
-      <div>
-        <div class="cal-toolbar">
-          <div class="mon" id="calTitle" data-dyn>2026년 11월</div>
-          <div class="cal-nav">
-            <button onclick="shiftMonth(-1)" aria-label="이전 달">‹</button>
-            <button onclick="shiftMonth(1)" aria-label="다음 달">›</button>
-          </div>
-        </div>
-        <div class="cal-months">
-          <div class="cal" id="cal1" data-dyn></div>
-          <div class="cal" id="cal2" data-dyn></div>
-        </div>
-        <div class="legend">
-          <span><i class="l-open"></i>예약 가능</span>
-          <span><i class="l-sel"></i>선택</span>
-          <span><i class="l-off"></i>마감 · 판매중지</span>
-          <span>숫자 아래는 1박 요금</span>
-        </div>
-        <div class="sel-line">
-          <div><span>체크인</span><b id="selIn" data-dyn>—</b></div>
-          <div><span>체크아웃</span><b id="selOut" data-dyn>—</b></div>
-          <div><span>숙박</span><b id="selNights" data-dyn>—</b></div>
-        </div>
-        <div style="margin-top:18px;background:#fff;border:1px solid var(--line);padding:8px 20px 14px">
-          <div class="guests-row">
-            <div class="lab">성인 <small>만 13세 이상</small></div>
-            <div class="stepper"><button onclick="stepGuest('adults',-1)">−</button><b id="gAdults">8</b><button onclick="stepGuest('adults',1)">+</button></div>
-          </div>
-          <div class="guests-row">
-            <div class="lab">아동 <small>만 2~12세 · 기준 인원에 포함</small></div>
-            <div class="stepper"><button onclick="stepGuest('children',-1)">−</button><b id="gChildren">0</b><button onclick="stepGuest('children',1)">+</button></div>
-          </div>
-          <div class="guests-row" style="border-bottom:0">
-            <div class="lab">유아 <small>24개월 미만 · 추가 요금 없음</small></div>
-            <div class="stepper"><button onclick="stepGuest('infants',-1)">−</button><b id="gInfants">0</b><button onclick="stepGuest('infants',1)">+</button></div>
-          </div>
-        </div>
-      </div>
-      <aside class="quote" id="quoteCard" data-dyn>
-        <div class="qhead"><b>예약 견적</b><span id="qBadge">날짜 선택</span></div>
-        <div class="qbody" id="qBody">
-          <p style="font-size:13px;color:var(--muted);margin:4px 0 8px">달력에서 체크인·체크아웃 날짜를 선택해 주세요.</p>
-          <div class="qline"><span>1박 요금</span><b>—</b></div>
-        </div>
-        <div class="qtotal"><span id="qTotalLab">총 결제 금액</span><b id="qTotal">—</b></div>
-        <div class="qfx" id="qFx"></div>
-        <div class="qfoot">
-          <button class="btn gold wide" id="qBtn" onclick="startBooking()" disabled>예약하기</button>
-          <p class="qnote">결제 수단: 신용·체크카드 / 해외카드(Visa·Mastercard·JCB) / PayPal / 계좌이체(무통장). 예약 확정 시 해당 날짜는 자동으로 마감됩니다.</p>
-        </div>
-      </aside>
-    </div>
-  </div>
-</section>
 
 <section class="section" id="reviews" style="background:#fff;border-top:1px solid var(--line)">
   <div class="wrap">

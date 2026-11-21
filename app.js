@@ -301,6 +301,7 @@ function setLang(l){
   applyStatic();
   if(typeof renderCals==='function'){ renderCals(); renderQuote(); syncSearch(); renderGallery(); }
   if(typeof renderReviews==='function') renderReviews();
+  if(typeof paintNaverStamp==='function') paintNaverStamp();
   if(typeof paintCloud==='function') paintCloud();
   document.querySelectorAll('.modal.show').forEach(m=>closeModal(m.id));
 }
@@ -783,7 +784,7 @@ function renderQuote(){
       + (ST.in? pretty(ST.in)+L(' 체크인 — 체크아웃 날짜를 선택해 주세요.',' check-in — now choose your check-out date.',' 入住——請選擇退房日期。') : L('달력에서 체크인·체크아웃 날짜를 선택해 주세요.','Choose your check-in and check-out dates on the calendar.','請在日曆上選擇入住與退房日期。'))
       + '</p><div class="qline"><span>'+L('1박 요금','Nightly rate','每晚房價')+'</span><b>—</b></div>';
     total.textContent='—'; if(fxEl) fxEl.textContent=''; btn.disabled = true;
-    renderQuickPicks(); renderBar();
+    renderBar();
     return;
   }
   let rows = '';
@@ -812,7 +813,7 @@ function renderQuote(){
   }else{
     btn.disabled = false; btn.textContent=L('예약하기','Book now','立即預訂')+' · '+won(q.total);
   }
-  renderQuickPicks(); renderBar();
+  renderBar();
 }
 function toggleKids(){ ST.kidsroom = !ST.kidsroom; renderQuote(); }
 function toggleCoupon(){ ST.coupon = !ST.coupon; renderQuote(); }
@@ -876,12 +877,6 @@ function calPriceShort(n){
   if(LANG==='zh') return Math.round(n/10000)+'萬';
   return Math.round(n/1000)+'k';
 }
-function prettyChip(s){
-  const d=parseDS(s), w=d.getDay();
-  if(LANG==='en') return MON_EN[d.getMonth()]+' '+d.getDate()+' ('+DOW_EN[w]+')';
-  if(LANG==='zh') return (d.getMonth()+1)+'/'+d.getDate()+'（'+DOW_ZH[w]+'）';
-  return (d.getMonth()+1)+'/'+d.getDate()+'('+DOW[w]+')';
-}
 /* 실제 판매중(마감·차단 제외)인 다가오는 날짜만 1박 옵션으로 뽑는다 */
 function quickPickOptions(max){
   const out=[], lim=max||6;
@@ -897,26 +892,6 @@ function pickEarliest(){
   if(!o.length) return false;
   ST.in=o[0].in; ST.out=o[0].out;
   return true;
-}
-function pickQuick(ds){
-  ST.in=ds; ST.out=addDays(ds,1);
-  renderCals(); renderQuote(); syncSearch();
-}
-function renderQuickPicks(){
-  const box=document.getElementById('qpChips'); if(!box) return;
-  const opts=quickPickOptions(6);
-  if(!opts.length){
-    box.innerHTML='<span class="qp-none">'+L('지금 바로 예약 가능한 날짜가 없습니다. 010-2650-0013으로 문의해 주세요.','No dates are open right now — please call 010-2650-0013.','目前沒有可預訂的日期，請電 010-2650-0013。')+'</span>';
-    return;
-  }
-  box.innerHTML = opts.map(o=>{
-    const on = (ST.in===o.in && ST.out===o.out);
-    return '<button class="qp-chip'+(on?' on':'')+'" onclick="pickQuick(\''+o.in+'\')"'
-      + ' aria-label="'+prettyFull(o.in)+' · '+L('1박 ','1 night ','1 晚 ')+won(o.price)+'">'
-      + '<span class="qp-d">'+prettyChip(o.in)+'</span>'
-      + '<span class="qp-p">'+wonShort(o.price)+'<em>· '+L('1박','1 night','1 晚')+'</em></span>'
-      + '</button>';
-  }).join('');
 }
 function lowestOpenPrice(){
   const o=quickPickOptions(1);

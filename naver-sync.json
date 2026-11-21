@@ -1,7 +1,7 @@
 {
  "source": "https://m.booking.naver.com/booking/3/bizes/842506/items/4858363",
  "api": "m.booking.naver.com/graphql opName=schedule",
- "updatedAt": "2026-11-21T13:41:49+09:00",
+ "updatedAt": "2026-11-21T13:53:29+09:00",
  "timezone": "Asia/Seoul",
  "openUntil": "2027-01-31",
  "days": {

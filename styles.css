@@ -20,6 +20,7 @@ a{color:inherit}
 h1,h2,h3,h4{font-family:var(--serif);font-weight:500;letter-spacing:-.01em;margin:0}
 .section{padding:86px 0}
 section[id],[id="top"]{scroll-margin-top:118px}
+main>.section:first-child{padding-top:48px}
 .section.tight{padding:56px 0}
 .hair{height:1px;background:var(--line);border:0;margin:0}
 
@@ -55,7 +56,7 @@ section[id],[id="top"]{scroll-margin-top:118px}
 .mnav .wrap{display:flex;gap:6px;align-items:center;white-space:nowrap;height:46px}
 .mnav a{flex:0 0 auto;color:rgba(255,255,255,.8);text-decoration:none;font-size:13px;padding:6px 13px;border:1px solid rgba(255,255,255,.2);border-radius:100px;line-height:1.2}
 .mnav a:active{background:rgba(255,255,255,.14)}
-.mnav a.mnav-book{background:var(--gold);color:#1A1305;border-color:var(--gold);font-weight:700;margin-left:auto}
+.mnav a.mnav-book{background:var(--gold);color:#1A1305;border-color:var(--gold);font-weight:700;margin-right:2px}
 
 /* search bar */
 .searchbar{position:sticky;top:64px;z-index:55;background:rgba(248,244,236,.97);border-bottom:1px solid var(--sand);backdrop-filter:blur(10px)}
@@ -203,23 +204,6 @@ table.rate tr.hi td{color:var(--gold)}
 .opt-row.free .amt{color:var(--ok)}
 
 /* quick pick */
-.quickpick{background:#fff;border:1px solid var(--sand);padding:18px 20px 16px;margin:0 0 28px}
-.qp-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:12px}
-.qp-head b{font-family:var(--serif);font-size:16px;font-weight:600}
-.qp-head span{font-size:12px;color:var(--muted)}
-.qp-chips{display:flex;gap:8px;overflow-x:auto;padding:2px 0 6px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
-.qp-chips::-webkit-scrollbar{display:none}
-.qp-chip{flex:0 0 auto;min-width:104px;border:1px solid var(--sand);background:var(--ivory);padding:10px 14px;text-align:left;transition:.15s;display:flex;flex-direction:column;gap:2px}
-.qp-chip:hover{border-color:var(--gold);background:#fff}
-.qp-chip .qp-d{font-size:12px;letter-spacing:.02em;font-weight:600;white-space:nowrap}
-.qp-chip .qp-p{font-family:var(--serif);font-size:17px;color:var(--navy);white-space:nowrap}
-.qp-chip .qp-p em{font-family:var(--sans);font-style:normal;font-size:10.5px;color:var(--muted);margin-left:5px}
-.qp-chip.on{background:var(--navy);border-color:var(--navy)}
-.qp-chip.on .qp-d{color:rgba(255,255,255,.8)}
-.qp-chip.on .qp-p{color:var(--gold)}
-.qp-chip.on .qp-p em{color:rgba(255,255,255,.65)}
-.qp-none{font-size:12.5px;color:var(--muted)}
-.qp-note{font-size:11px;color:var(--muted);margin-top:8px}
 
 /* sticky booking bar */
 .bookbar{position:fixed;left:0;right:0;bottom:0;z-index:90;background:rgba(10,25,38,.97);color:#fff;border-top:1px solid rgba(255,255,255,.14);backdrop-filter:blur(10px);box-shadow:0 -14px 34px -22px rgba(0,0,0,.7);transform:translateY(0);transition:transform .2s}
@@ -457,7 +441,9 @@ footer a:hover{color:#fff}
 @media(max-width:720px){
   .wrap{padding:0 18px}
   .section{padding:58px 0}
-  .searchbar{position:static}
+  main>.section:first-child{padding-top:20px}
+  /* 모바일: 예약 달력이 첫 화면 맨 위에 바로 오도록 중복 검색바는 숨김 (달력·인원 스텝퍼가 같은 역할) */
+  .searchbar{display:none}
   section[id],[id="top"]{scroll-margin-top:104px}
   .searchbar .wrap{grid-template-columns:1fr 1fr;padding:10px 18px}
   .sb-cell{padding:6px 10px}
@@ -478,6 +464,10 @@ footer a:hover{color:#fff}
   .hero h1{font-size:25px !important;line-height:1.32;max-width:none;letter-spacing:-.01em}
   .hero-sub{font-size:13.5px;margin-top:10px;max-width:none;color:rgba(255,255,255,.88)}
   .mnav+.searchbar .sb-cell{min-height:54px}
+  #booking h2{font-size:22px !important;line-height:1.3}
+  #booking .eyebrow{font-size:10px;letter-spacing:.22em}
+  #naverStamp{font-size:12px !important;margin-bottom:12px !important}
+  .cal-toolbar{margin-bottom:12px}
   .searchbar .sb-cell input,.searchbar .sb-cell select{min-height:20px}
   .hero-facts{gap:12px;margin-top:22px;padding-top:14px}
   .hero-facts div{min-width:0 !important;flex:1 1 44%;margin-bottom:8px}
@@ -513,13 +503,6 @@ footer a:hover{color:#fff}
   .bb-sub{font-size:11px}
   .bb-btn{padding:13px 18px;font-size:13px}
   body{padding-bottom:70px}
-  .quickpick{padding:14px 14px 12px;margin-bottom:22px}
-  .qp-head b{font-size:15px}
-  .qp-head span{display:block;font-size:11.5px;margin-top:2px}
-  .qp-chips{display:grid;grid-template-columns:1fr 1fr;gap:8px;overflow:visible;padding-bottom:0}
-  .qp-chip{min-width:0;padding:9px 12px}
-  .qp-chip .qp-p{font-size:16px}
-  .quickpick+.book-grid{margin-top:4px}
   .book-guest{padding:2px 12px}
   .pane{padding:18px}
   .acct .n{font-size:16px}
