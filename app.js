@@ -17,6 +17,10 @@ function fxText(krw){
 const DICT = {};
 DICT.en = {
 '숙소 소개':'The house','사진':'Photos','요금':'Rates','후기':'Reviews','위치·이용안내':'Location & info',
+'소개':'About','위치':'Location','예약':'Book',
+'광안리 해변 1분,':'One minute to Gwangalli Beach,',
+'60평 독채 오션뷰 풀빌라 · 온수풀·자쿠지·키즈룸':'A 60-pyeong private villa on the beach — pool, jacuzzi, kids’ room',
+'슈퍼호스트':'Superhost',
 '예약하기':'Book now','내 예약':'My bookings','호스트':'Host',
 '체크인':'Check-in','체크아웃':'Check-out','인원':'Guests','날짜 선택':'Select date',
 '성인 2명':'2 adults','성인 4명':'4 adults','성인 6명':'6 adults','성인 8명 (기준)':'8 adults (base)','성인 10명':'10 adults','성인 12명 (최대)':'12 adults (max)',
@@ -121,6 +125,10 @@ DICT.en = {
 };
 DICT.zh = {
 '숙소 소개':'住宿介紹','사진':'照片','요금':'房價','후기':'評價','위치·이용안내':'位置與須知',
+'소개':'介紹','위치':'位置','예약':'預訂',
+'광안리 해변 1분,':'廣安里海灘 1 分鐘，',
+'60평 독채 오션뷰 풀빌라 · 온수풀·자쿠지·키즈룸':'60 坪獨棟海景泳池別墅 · 溫水泳池・按摩浴缸・兒童房',
+'슈퍼호스트':'超讚房東',
 '예약하기':'立即預訂','내 예약':'我的預訂','호스트':'房東',
 '체크인':'入住','체크아웃':'退房','인원':'人數','날짜 선택':'選擇日期',
 '성인 2명':'2 位成人','성인 4명':'4 位成人','성인 6명':'6 位成人','성인 8명 (기준)':'8 位成人（基本）','성인 10명':'10 位成人','성인 12명 (최대)':'12 位成人（最多）',
@@ -366,6 +374,154 @@ function loadCfg(){
   const d={ bank:'카카오뱅크 (KakaoBank)', account:'7979-37-59001', holder:'송경화', depositNote:'예약 후 24시간 내 입금' };
   if(LS.get('tg_cfg_v',0)<1) return d;
   return Object.assign({}, d, LS.get('tg_cfg',{}));
+}
+
+/* ═══════════════════════════════════════════════════════════
+   CLOUD — Firebase Firestore 실시간 서버 (무료 Spark 플랜)
+   예약·날짜 차단·계좌 설정이 모든 기기에 실시간으로 공유됩니다.
+   연결이 안 되는 환경(오프라인·방화벽)에서는 이 브라우저 저장소로
+   자동 폴백해 앱이 그대로 동작합니다.
+   ═══════════════════════════════════════════════════════════ */
+const FB_CFG = {
+  apiKey: "AIzaSyBQ3p-HNEYmsPjrvzW5Eow6sdzj9jGBZTc",
+  authDomain: "thegwangan-booking.firebaseapp.com",
+  projectId: "thegwangan-booking",
+  storageBucket: "thegwangan-booking.firebasestorage.app",
+  messagingSenderId: "159741444156",
+  appId: "1:159741444156:web:f38cad59da6c792e518339"
+};
+const HOST_EMAIL = 'inthespaceinterior@gmail.com';
+const CLOUD = { on:false, db:null, auth:null, uid:null, user:null, host:false, live:false, err:null };
+
+function initCloud(){
+  try{
+    if(typeof firebase === 'undefined' || !firebase.initializeApp) throw new Error('sdk');
+    firebase.initializeApp(FB_CFG);
+    CLOUD.db = firebase.firestore();
+    CLOUD.auth = firebase.auth();
+    CLOUD.on = true;
+    CLOUD.auth.onAuthStateChanged(u=>{
+      CLOUD.user = u || null;
+      CLOUD.uid = u ? u.uid : null;
+      CLOUD.host = !!(u && u.email === HOST_EMAIL);
+      paintCloud();
+      if(hostCurrent==='res'||hostCurrent==='cfg'||hostCurrent==='cal') hostTab(hostCurrent);
+      if(document.getElementById('mineModal').classList.contains('show')) openMine();
+    });
+    CLOUD.auth.signInAnonymously().catch(e=>{ console.warn('[cloud] anon', e && e.code); });
+    watchCloud();
+  }catch(e){
+    CLOUD.on = false; CLOUD.err = (e && e.message) || 'init';
+    console.warn('[cloud] init failed', e);
+    paintCloud();
+  }
+}
+
+function watchCloud(){
+  CLOUD.db.collection('bookings').onSnapshot(snap=>{
+    ST.reservations = snap.docs.map(d=>Object.assign({docId:d.id}, d.data()))
+      .sort((a,b)=>String(b.createdAt||'').localeCompare(String(a.createdAt||'')));
+    CLOUD.live = true; CLOUD.err = null;
+    paintCloud(); refreshUI();
+    if(document.getElementById('mineModal').classList.contains('show')) openMine();
+    if(hostCurrent==='res' && document.getElementById('hostModal').classList.contains('show')) hostTab('res');
+  }, e=>{ CLOUD.live=false; CLOUD.err=(e&&e.code)||'read'; paintCloud(); console.warn('[cloud] bookings', e); });
+
+  CLOUD.db.collection('blocks').onSnapshot(snap=>{
+    const b={}; snap.docs.forEach(d=>{ b[d.id]=Object.assign({}, d.data()); });
+    ST.blocks = b; refreshUI();
+    if(hostCurrent==='ical'||hostCurrent==='cal') hostTab(hostCurrent);
+  }, e=>{ console.warn('[cloud] blocks', e); });
+
+  CLOUD.db.collection('config').doc('site').onSnapshot(doc=>{
+    if(!doc.exists) return;
+    ST.cfg = Object.assign({}, ST.cfg, doc.data());
+    if(hostCurrent==='cfg' && document.getElementById('hostModal').classList.contains('show')) hostTab('cfg');
+    renderQuote();
+  }, e=>{ console.warn('[cloud] config', e); });
+}
+
+function refreshUI(){
+  if(typeof renderCals==='function'){ renderCals(); renderQuote(); }
+  if(typeof syncSearch==='function') syncSearch();
+}
+function paintCloud(){
+  const el=document.getElementById('cloudState'); if(!el) return;
+  if(!CLOUD.on){ el.textContent = L('이 기기에만 저장 (오프라인 모드)','Saved on this device only (offline mode)','僅儲存在此裝置（離線模式）'); return; }
+  if(CLOUD.err){ el.textContent = L('서버 연결 오류 — 이 기기에만 저장','Server error — saving on this device','伺服器連線錯誤——僅存於此裝置'); return; }
+  if(CLOUD.host) el.textContent = L('서버 실시간 연결 · 호스트 로그인됨','Live server · host signed in','伺服器即時連線 · 房東已登入');
+  else if(CLOUD.live) el.textContent = L('서버 실시간 연결됨','Live server connected','伺服器已即時連線');
+  else el.textContent = L('서버 연결 중…','Connecting to server…','正在連線伺服器…');
+}
+
+async function ensureAnon(){
+  if(CLOUD.auth.currentUser) return CLOUD.auth.currentUser;
+  const cred = await CLOUD.auth.signInAnonymously();
+  return cred.user;
+}
+
+/* 쓰기: 예약 생성 */
+async function cloudAddBooking(rec){
+  if(!CLOUD.on) return {ok:false, offline:true};
+  const u = await ensureAnon();
+  const data = Object.assign({}, rec, {
+    ownerUid: u.uid, ownerAnonymous: !!u.isAnonymous,
+    createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
+  });
+  delete data.docId;
+  await CLOUD.db.collection('bookings').doc(rec.id).set(data);
+  return {ok:true};
+}
+/* 쓰기: 예약 상태 변경 (입금확인·취소) */
+async function cloudUpdateBooking(docId, patch){
+  if(!CLOUD.on) return {ok:false, offline:true};
+  await CLOUD.db.collection('bookings').doc(docId).update(Object.assign({updatedAt:new Date().toISOString()}, patch));
+  return {ok:true};
+}
+/* 쓰기: 날짜 차단/해제 */
+async function cloudSetBlock(date, val){
+  if(!CLOUD.on) return {ok:false, offline:true};
+  const ref = CLOUD.db.collection('blocks').doc(date);
+  if(val) await ref.set(Object.assign({updatedAt:new Date().toISOString()}, val));
+  else await ref.delete();
+  return {ok:true};
+}
+/* 쓰기: 계좌·설정 */
+async function cloudSaveCfg(cfg){
+  if(!CLOUD.on) return {ok:false, offline:true};
+  await CLOUD.db.collection('config').doc('site').set(Object.assign({updatedAt:new Date().toISOString()}, cfg), {merge:true});
+  return {ok:true};
+}
+function cloudErrMsg(e){
+  const c = (e && e.code) || '';
+  if(String(c).indexOf('permission-denied')>=0) return L('권한이 없습니다 — 호스트 로그인이 필요합니다','Permission denied — host sign-in required','權限不足——需要房東登入');
+  if(String(c).indexOf('unavailable')>=0) return L('서버에 연결할 수 없습니다. 잠시 후 다시 시도해 주세요','Cannot reach the server. Please try again','無法連線伺服器，請稍後再試');
+  return L('저장에 실패했습니다','Could not save','儲存失敗');
+}
+function hostSignIn(){
+  if(!CLOUD.on){ toast(L('서버에 연결되어 있지 않습니다','Not connected to the server','未連線伺服器')); return; }
+  const provider = new firebase.auth.GoogleAuthProvider();
+  provider.setCustomParameters({prompt:'select_account'});
+  CLOUD.auth.signInWithPopup(provider).then(res=>{
+    if(!res.user || res.user.email !== HOST_EMAIL){
+      const em = res.user ? res.user.email : '';
+      CLOUD.auth.signOut().then(()=>CLOUD.auth.signInAnonymously().catch(()=>{}));
+      toast(L('호스트 계정이 아닙니다: ','Not the host account: ','非房東帳號：')+em);
+      return;
+    }
+    toast(L('호스트로 로그인했습니다','Signed in as host','已以房東身分登入'));
+  }).catch(e=>{
+    if((e&&e.code)==='auth/popup-closed-by-user'||(e&&e.code)==='auth/cancelled-popup-request') return;
+    toast(L('로그인 실패: ','Sign-in failed: ','登入失敗：')+((e&&e.code)||(e&&e.message)||''));
+  });
+}
+function hostSignOut(){
+  CLOUD.auth.signOut().then(()=>CLOUD.auth.signInAnonymously().catch(()=>{})).then(()=>toast(L('로그아웃했습니다','Signed out','已登出')));
+}
+function hostAuthStrip(){
+  if(!CLOUD.on) return '<div class="warnbox" style="background:#FFF6E3;border:1px solid #EBD9A8;padding:10px 12px;font-size:12px;color:#6A5312;margin-bottom:14px">'+L('서버 연결 없이 이 기기에만 저장 중입니다.','Working offline — data stays on this device.','離線作業中——資料僅存於此裝置。')+'</div>';
+  if(CLOUD.host) return '<div style="background:#EEF6F0;border:1px solid #CBE3D2;padding:9px 12px;font-size:12px;color:#22573B;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;gap:10px"><span>'+L('호스트 로그인됨 · ','Host signed in · ','房東已登入 · ')+esc(CLOUD.user.email||'')+'</span><button class="ghost-mini" onclick="hostSignOut()">'+L('로그아웃','Sign out','登出')+'</button></div>';
+  return '<div style="background:#FFF6E3;border:1px solid #EBD9A8;padding:10px 12px;font-size:12px;color:#6A5312;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap"><span>'+L('예약 확인·입금확인·취소·날짜 차단은 호스트 로그인이 필요합니다. (조회는 자유)','Viewing is open; confirming, cancelling and blocking dates need host sign-in.','可自由查看；確認、取消與關閉日期需房東登入。')+'</span><button class="btn gold" style="padding:7px 13px;font-size:12px" onclick="hostSignIn()">'+L('호스트 구글 로그인','Host Google sign-in','房東 Google 登入')+'</button></div>';
 }
 
 /* ── availability ── */
@@ -836,7 +992,7 @@ function copyAccount(digits){
 }
 
 /* ── 확정 ── */
-function finishBooking(method){
+async function finishBooking(method){
   const q=BOOK.q;
   const no = 'TG'+String(Date.now()).slice(-8);
   const rec = {
@@ -849,6 +1005,17 @@ function finishBooking(method){
     depositor: method==='bank'? BOOK.depositor : null,
     payer: BOOK.payer, createdAt:new Date().toISOString()
   };
+  let synced = false;
+  if(CLOUD.on){
+    const btn = document.querySelector('#bkPane .btn.gold'); if(btn){ btn.disabled = true; btn.textContent = L('저장 중…','Saving…','儲存中…'); }
+    try{ await cloudAddBooking(rec); synced = true; }
+    catch(e){
+      console.warn('[cloud] create', e);
+      toast(cloudErrMsg(e));
+      if(btn){ btn.disabled = false; btn.textContent = L('다시 시도','Try again','再試一次'); }
+      return; // 서버에 저장되지 않았으면 날짜를 마감 처리하지 않는다
+    }
+  }
   ST.reservations.unshift(rec); saveAll();
   closeModal('pgModal');
   renderBookStep(3);
@@ -873,7 +1040,9 @@ function finishBooking(method){
     + '<div style="display:flex;gap:8px;justify-content:center;margin-top:16px;flex-wrap:wrap"><button class="btn ghost" onclick="downloadICS()">'+L('캘린더(.ics) 저장','Save to calendar (.ics)','儲存至行事曆（.ics）')+'</button>'
     + '<button class="btn ghost" onclick="openMine()">'+L('내 예약 보기','My bookings','查看我的預訂')+'</button>'
     + '<button class="btn" onclick="closeBooking();renderCals();renderQuote()">'+L('닫기','Close','關閉')+'</button></div>'
-    + '<p class="qnote" style="text-align:center;margin-top:14px">'+L('선택하신 날짜는 이 브라우저의 예약 달력에서 마감 처리되었습니다.','Those dates are now closed on this browser’s booking calendar.','您選擇的日期已在本瀏覽器預訂日曆中關閉。')+'</p></div>';
+    + '<p class="qnote" style="text-align:center;margin-top:14px">'+(synced
+        ? L('선택하신 날짜가 서버에 등록되어 모든 기기에서 예약 마감으로 잼깁니다.','Those dates are now held on the server and closed on every device.','您選擇的日期已在伺服器登記，所有裝置上都會顯示為已滿。')
+        : L('서버에 연결되지 않아 이 기기에만 저장되었습니다.','Not connected to the server, so this booking was saved on this device only.','未連線伺服器，此預訂僅儲存在本裝置。'))+'</p></div>';
   ST.in=null; ST.out=null;
   renderCals(); renderQuote(); syncSearch();
 }
@@ -882,7 +1051,7 @@ function closeBooking(){ closeModal('bookModal'); closeModal('pgModal'); ST.in=n
 /* ── my reservations ── */
 function openMine(){
   const body=document.getElementById('mineBody');
-  const list=ST.reservations;
+  const list = CLOUD.on ? ST.reservations.filter(r=>r.ownerUid===CLOUD.uid) : ST.reservations;
   if(!list.length){ body.innerHTML='<p style="color:var(--muted);font-size:13.5px">'+L('아직 예약 내역이 없습니다. 달력에서 날짜를 선택해 예약해 보세요.','No bookings yet. Pick dates on the calendar to make one.','尚無預訂紀錄。請在日曆上選擇日期預訂。')+'</p>'; }
   else {
     body.innerHTML = list.map(r=>{
@@ -899,11 +1068,15 @@ function openMine(){
   }
   openModal('mineModal');
 }
-function cancelRes(id){
+async function cancelRes(id){
   const r = ST.reservations.find(x=>x.id===id); if(!r) return;
   if(!confirm(L(prettyFull(r.checkIn)+' 예약을 취소할까요? 취소하면 해당 날짜가 다시 열립니다.',
                    'Cancel the booking starting '+prettyFull(r.checkIn)+'? Those dates will open again.',
                    '要取消 '+prettyFull(r.checkIn)+' 起的預訂嗎？取消後該日期將重新開放。'))) return;
+  if(CLOUD.on){
+    try{ await cloudUpdateBooking(r.docId||r.id, {status:'cancel', cancelledAt:new Date().toISOString()}); }
+    catch(e){ console.warn('[cloud] cancel', e); toast(cloudErrMsg(e)); return; }
+  }
   r.status='cancel'; saveAll(); openMine(); renderCals(); renderQuote();
   toast(L('예약이 취소되었습니다','Booking cancelled','預訂已取消'));
 }
@@ -958,13 +1131,17 @@ function parseICS(text, src='ical'){
       else if(/^SUMMARY/.test(line)) ev.summary = line.split(':').slice(1).join(':');
     }
   }
+  const pushed=[];
   events.forEach(e=>{
     if(!e.start) return;
     const end = e.end && e.end>e.start ? e.end : addDays(e.start,1);
     let d=e.start;
-    while(d<end){ if(!ST.blocks[d]){ ST.blocks[d]={src, note:(e.summary||'').slice(0,40)}; added++; } d=addDays(d,1); }
+    while(d<end){ if(!ST.blocks[d]){ ST.blocks[d]={src, note:(e.summary||'').slice(0,40)}; pushed.push(d); added++; } d=addDays(d,1); }
   });
   saveAll();
+  if(CLOUD.on && pushed.length){
+    pushed.forEach(d=>cloudSetBlock(d, ST.blocks[d]).catch(er=>console.warn('[cloud] ical', er)));
+  }
   return {added, events: events.length};
 }
 function normICalDate(v){
@@ -990,6 +1167,7 @@ function hostTab(t, btn){
   if(t==='res') body.innerHTML = hostRes();
   if(t==='cfg') body.innerHTML = hostCfg();
   if(t==='guide') body.innerHTML = hostGuide();
+  body.insertAdjacentHTML('afterbegin', hostAuthStrip());
   if(LANG!=='ko') body.insertAdjacentHTML('afterbegin','<div class="demo-note">Host tools are kept in Korean for the owner. Guest-facing pages switch with the language menu.</div>');
 }
 function hostCal(){
@@ -1065,7 +1243,11 @@ function fetchIcal(){
     toast('CORS로 직접 읽을 수 없습니다. .ics 파일을 내려받아 가져와 주세요');
   });
 }
-function clearBlocks(){ if(confirm('가져온 차단 날짜를 모두 지울까요?')){ ST.blocks={}; saveAll(); hostTab('ical'); renderCals(); } }
+function clearBlocks(){ if(!confirm('가져온 차단 날짜를 모두 지울까요?')) return;
+  const dates=Object.keys(ST.blocks);
+  ST.blocks={}; saveAll(); hostTab('ical'); renderCals();
+  if(CLOUD.on) dates.forEach(d=>cloudSetBlock(d,null).catch(e=>console.warn('[cloud] clear', e)));
+}
 function hostRes(){
   const list=ST.reservations;
   if(!list.length) return '<p style="font-size:13px;color:var(--muted)">자체 예약 내역이 없습니다.</p>';
@@ -1075,7 +1257,12 @@ function hostRes(){
     + '<td>'+(r.status==='wait'?'<button class="ghost-mini" onclick="markPaid(\''+r.id+'\')">입금확인</button>':'')+'</td></tr>').join('')
     + '</tbody></table>';
 }
-function markPaid(id){ const r=ST.reservations.find(x=>x.id===id); if(r){ r.status='paid'; saveAll(); hostTab('res'); toast('입금 확인 처리했습니다'); } }
+function markPaid(id){ const r=ST.reservations.find(x=>x.id===id); if(!r) return;
+  const done=()=>{ r.status='paid'; saveAll(); hostTab('res'); toast('입금 확인 처리했습니다'); };
+  if(CLOUD.on){
+    cloudUpdateBooking(r.docId||r.id, {status:'paid'}).then(done).catch(e=>{ console.warn('[cloud] markPaid', e); toast(cloudErrMsg(e)); });
+  } else done();
+}
 function hostCfg(){
   return '<h4 style="font-size:14px;margin-bottom:8px">입금 계좌</h4>'
     + '<p style="font-size:12.5px;color:#46525E">계좌이체 예약 화면에 표시될 실제 계좌입니다. 비어 있으면 예약 화면에 “계좌 미등록”으로 안내됩니다.</p>'
@@ -1099,28 +1286,36 @@ function hostCfg(){
     + '</tbody></table>';
 }
 function saveCfg(){
-  ST.cfg={ bank:document.getElementById('cfBank').value.trim(), account:document.getElementById('cfAcct').value.trim(),
-           holder:document.getElementById('cfHolder').value.trim(), depositNote:document.getElementById('cfNote').value.trim() };
-  saveAll(); toast('계좌 정보를 저장했습니다'); hostTab('cfg');
+  const cfg={ bank:document.getElementById('cfBank').value.trim(), account:document.getElementById('cfAcct').value.trim(),
+              holder:document.getElementById('cfHolder').value.trim(), depositNote:document.getElementById('cfNote').value.trim() };
+  ST.cfg=Object.assign({}, ST.cfg, cfg); saveAll(); renderQuote();
+  if(CLOUD.on){
+    cloudSaveCfg(cfg).then(()=>{ toast('계좌 정보를 저장했습니다 (모든 기기에 반영)'); hostTab('cfg'); })
+      .catch(e=>{ console.warn('[cloud] cfg', e); toast(cloudErrMsg(e)); });
+  } else { toast('계좌 정보를 저장했습니다 (이 기기에만)'); hostTab('cfg'); }
 }
 function openDate(){
   const d=document.getElementById('cfOpen').value; if(!d){ toast('날짜를 선택해 주세요'); return; }
-  ST.blocks[d]={src:'host', note:'호스트 강제 오픈', forceOpen:true}; saveAll(); renderCals(); toast(d+' 예약 오픈'); hostTab('cfg');
+  const val={src:'host', note:'호스트 강제 오픈', forceOpen:true};
+  ST.blocks[d]=val; saveAll(); renderCals(); toast(d+' 예약 오픈 (서버 반영 중)'); hostTab('cfg');
+  if(CLOUD.on) cloudSetBlock(d, val).catch(e=>{ console.warn('[cloud] block', e); toast(cloudErrMsg(e)); });
 }
 function blockDate(){
   const d=document.getElementById('cfOpen').value; if(!d){ toast('날짜를 선택해 주세요'); return; }
-  ST.blocks[d]={src:'host', note:'호스트 차단'}; saveAll(); renderCals(); toast(d+' 차단'); hostTab('cfg');
+  const val={src:'host', note:'호스트 차단'};
+  ST.blocks[d]=val; saveAll(); renderCals(); toast(d+' 차단 (서버 반영 중)'); hostTab('cfg');
+  if(CLOUD.on) cloudSetBlock(d, val).catch(e=>{ console.warn('[cloud] block', e); toast(cloudErrMsg(e)); });
 }
 function hostGuide(){
   return '<div class="guide">'
-    + '<div class="okbox"><b>지금 이 앱에서 실제로 되는 것</b><br>· 네이버 예약에서 확인한 날짜별 요금·마감 상태 표시<br>· 예약 시 해당 날짜 즉시 마감(이 브라우저)<br>· .ics 내보내기 / .ics 파일·텍스트 가져오기</div>'
-    + '<div class="warnbox"><b>정적 웹앱만으로는 안 되는 것</b><br>· 에어비앤비·네이버 서버 달력을 원격으로 마감<br>· 카드 실제 승인, 입금 자동 확인<br>· 여러 기기·여러 사람이 같은 달력을 공유</div>'
+    + '<div class="okbox"><b>지금 이 앱에서 실제로 되는 것</b><br>· 네이버 예약에서 확인한 날짜별 요금·마감 상태 표시<br>· 예약 시 해당 날짜가 <b>서버(Firebase)에 저장되어 모든 기기에서 즉시 마감</b><br>· 어느 기기에서 들어온 예약이든 이 호스트 패널에서 실시간 조회·입금확인·취소<br>· 호스트가 차단·오프픈한 날짜도 모든 기기에 즉시 반영<br>· .ics 내보내기 / .ics 파일·텍스트 가져오기(가져온 날짜도 서버 저장)</div>'
+    + '<div class="warnbox"><b>아직 안 되는 것</b><br>· 에어비앤비·네이버 서버 달력을 원격으로 마감(에어비앤비에서 이 앱으로는 .ics 가져오기로 가능)<br>· 카드 실제 승인, 입금 자동 확인</div>'
     + '<h4>실서비스 전환 시 필요한 연결</h4>'
     + '<ul>'
     + '<li><b>에어비앤비 양방향:</b> 에어비앤비 캘린더 iCal은 한쪽 방향(가져오기)만 지원합니다. 이 앱 예약을 에어비앤비에 자동 마감하려면 iCal URL을 서버에 두고 주기적으로 동기화하거나, 에어비앤비 API/채널매니저(호스텔월드·Smoobu·Guesty 등)를 연동해야 합니다.</li>'
     + '<li><b>네이버 예약:</b> 네이버 예약 파트너센터의 예약 관리와 연동하려면 네이버 예약 사업자 계정의 파트너 API(또는 채널매니저)가 필요합니다. 화면 자동화는 약관상 권장되지 않습니다.</li>'
     + '<li><b>결제:</b> 카드 결제는 PG사(토스페이먼츠·나이스페이·KG이니시스 등) 가맹점 키와 서버 승인 API가 필요합니다. 계좌이체 자동 확인은 가상계좌 발급(PG) 또는 입금 확인 서버(은행 API/오픈뱅킹)가 필요합니다.</li>'
-    + '<li><b>공유 DB:</b> 예약·차단 날짜를 여러 기기에서 함께 쓰려면 Firebase/Supabase 같은 서버 저장소가 필요합니다. 현재는 localStorage(이 브라우저)에만 저장됩니다.</li>'
+    + '<li><b>공유 DB:</b> 예약·차단 날짜는 Firebase Firestore(프로젝트 thegwangan-booking · 서울 리전)에 저장되어 모든 기기·모든 접속자가 실시간으로 공유합니다. 보안 규칙상 손님은 자기 예약만 만들고 취소할 수 있고, 호스트 기능(입금확인·취소·날짜차단·계좌)은 호스트 계정 로그인에서만 동작합니다.</li>'
     + '</ul>'
     + '<h4>운영 순서 제안</h4>'
     + '<ul><li>1) 이 페이지를 숙소 소개·견적 안내용으로 먼저 사용</li><li>2) 결제는 기존 채널(네이버·에어비앤비)로 연결</li><li>3) 자체 결제를 원하면 PG 가맹 + 서버(예약 DB·iCal 동기화) 구축 후 전환</li></ul>'
@@ -1177,6 +1372,8 @@ function init(){
   document.getElementById('gInfants').textContent=ST.infants;
   applyStatic();
   renderCals(); renderQuote(); syncSearch(); renderGallery(); renderReviews();
+  initCloud();
+  paintCloud();
   document.addEventListener('keydown', e=>{
     if(e.key==='Escape'){ closeViewer(); document.querySelectorAll('.modal.show').forEach(m=>closeModal(m.id)); }
     if(document.getElementById('viewer').classList.contains('show')){
