@@ -473,9 +473,11 @@ async function cloudAddBooking(rec){
   return {ok:true};
 }
 /* 쓰기: 예약 상태 변경 (입금확인·취소) */
-async function cloudUpdateBooking(docId, patch){
+async function cloudUpdateBooking(docId, patch, minimal){
   if(!CLOUD.on) return {ok:false, offline:true};
-  await CLOUD.db.collection('bookings').doc(docId).update(Object.assign({updatedAt:new Date().toISOString()}, patch));
+  const data = minimal ? Object.assign({}, patch)
+                       : Object.assign({updatedAt:new Date().toISOString()}, patch);
+  await CLOUD.db.collection('bookings').doc(docId).update(data);
   return {ok:true};
 }
 /* 쓰기: 날짜 차단/해제 */
@@ -1074,7 +1076,7 @@ async function cancelRes(id){
                    'Cancel the booking starting '+prettyFull(r.checkIn)+'? Those dates will open again.',
                    '要取消 '+prettyFull(r.checkIn)+' 起的預訂嗎？取消後該日期將重新開放。'))) return;
   if(CLOUD.on){
-    try{ await cloudUpdateBooking(r.docId||r.id, {status:'cancel', cancelledAt:new Date().toISOString()}); }
+    try{ await cloudUpdateBooking(r.docId||r.id, {status:'cancel', cancelledAt:new Date().toISOString()}, true); }
     catch(e){ console.warn('[cloud] cancel', e); toast(cloudErrMsg(e)); return; }
   }
   r.status='cancel'; saveAll(); openMine(); renderCals(); renderQuote();
