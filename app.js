@@ -1317,6 +1317,9 @@ function hostGuide(){
     + '<li><b>결제:</b> 카드 결제는 PG사(토스페이먼츠·나이스페이·KG이니시스 등) 가맹점 키와 서버 승인 API가 필요합니다. 계좌이체 자동 확인은 가상계좌 발급(PG) 또는 입금 확인 서버(은행 API/오픈뱅킹)가 필요합니다.</li>'
     + '<li><b>공유 DB:</b> 예약·차단 날짜는 Firebase Firestore(프로젝트 thegwangan-booking · 서울 리전)에 저장되어 모든 기기·모든 접속자가 실시간으로 공유합니다. 보안 규칙상 손님은 자기 예약만 만들고 취소할 수 있고, 호스트 기능(입금확인·취소·날짜차단·계좌)은 호스트 계정 로그인에서만 동작합니다.</li>'
     + '</ul>'
+    + '<h4>새 예약 알림 붙이기 (무료 플랜에서 가능한 방법)</h4>'
+    + '<p>Spark(무료) 플랜에는 Cloud Functions 트리거나 Firebase 확장 기능이 없습니다. 대신 <b>Google Apps Script 시간 기반 트리거</b>로 Firestore를 5분마다 읽어 새 예약이 있으면 메일·알림을 보낼 수 있습니다. 준비된 스크립트는 <span class="code" style="display:inline-block;padding:1px 6px">work/thegwangan-app/notifications-apps-script.gs</span> 입니다.</p>'
+    + '<ul><li>Apps Script에서 새 프로젝트 → 위 스크립트 붙여넣기 → <b>트리거</b>에서 <code>checkNewBookings</code>를 5분마다 실행으로 추가</li><li>메일 받을 주소만 바꾸면 됨(기본값: 호스트 지메일). 스크립트가 마지막 확인 시각을 저장해 중복 알림을 막아줍니다.</li></ul>'
     + '<h4>운영 순서 제안</h4>'
     + '<ul><li>1) 이 페이지를 숙소 소개·견적 안내용으로 먼저 사용</li><li>2) 결제는 기존 채널(네이버·에어비앤비)로 연결</li><li>3) 자체 결제를 원하면 PG 가맹 + 서버(예약 DB·iCal 동기화) 구축 후 전환</li></ul>'
     + '</div>';

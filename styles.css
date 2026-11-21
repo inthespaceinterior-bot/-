@@ -362,7 +362,7 @@ footer a:hover{color:#fff}
   .gal{grid-template-columns:1fr 1fr;grid-template-rows:180px 180px 180px}
   .gal button:first-child{grid-row:span 2;grid-column:span 2}
   .nav{display:none}
-  .mnav{display:block;position:sticky;top:64px;z-index:58;background:rgba(10,25,38,.97);border-bottom:1px solid rgba(255,255,255,.08);overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .mnav{display:block;position:sticky;top:64px;z-index:58;background:#0A1926;border-bottom:1px solid rgba(255,255,255,.08);overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
   .mnav::-webkit-scrollbar{display:none}
 @media(max-width:720px){
   .wrap{padding:0 18px}
