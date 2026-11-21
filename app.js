@@ -1098,7 +1098,8 @@ function accountBlock(){
   if(!c.account) return '<div class="acct" style="border-color:var(--warn);background:#FFF6EF"><div style="font-size:12px;color:var(--warn);font-weight:700">'+L('입금 계좌가 아직 등록되지 않았습니다','No bank account registered yet','尚未設定匯款帳戶')+'</div><div style="font-size:12px;color:#6A5312;margin-top:4px">'+L('호스트 패널 → 요금·계좌 탭에서 실제 계좌를 등록하세요.','Add the real account in Host panel → Rates & account.','請在房東後台 → 房價與帳戶 中設定。')+'</div></div>';
   return '<div class="acct">'
     + '<div style="font-size:11px;letter-spacing:.16em;color:var(--muted)">'+L('입금 계좌','Transfer to','匯款帳戶')+'</div>'
-    + '<div class="n">'+esc(c.bank)+' '+esc(c.account)+'</div>'
+    + '<div style="font-size:12.5px;color:#46525E;margin-top:2px">'+esc(c.bank)+'</div>'
+    + '<div class="n">'+esc(c.account)+'</div>'
     + '<div style="font-size:12.5px;color:#46525E">'+L('예금주 ','Account holder ','戶名 ')+esc(c.holder)+'</div>'
     + '<button class="copy-btn" style="margin-top:8px" onclick="copyAccount()">'+L('계좌번호 복사','Copy account number','複製帳號')+'</button>'
     + '<button class="copy-btn" style="margin-top:8px;margin-left:6px" onclick="copyAccount(true)">'+L('숫자만 복사','Copy digits only','僅複製數字')+'</button>'
