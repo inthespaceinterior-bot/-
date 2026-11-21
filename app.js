@@ -1142,7 +1142,11 @@ function parseICS(text, src='ical'){
   });
   saveAll();
   if(CLOUD.on && pushed.length){
-    pushed.forEach(d=>cloudSetBlock(d, ST.blocks[d]).catch(er=>console.warn('[cloud] ical', er)));
+    if(!CLOUD.host){
+      toast(L('가져온 날짜는 호스트 로그인 후에 모든 기기에 반영됩니다','Imported dates reach every device after host sign-in','匯入日期需房東登入後才會同步到所有裝置'));
+    } else {
+      pushed.forEach(d=>cloudSetBlock(d, ST.blocks[d]).catch(er=>console.warn('[cloud] ical', er)));
+    }
   }
   return {added, events: events.length};
 }
