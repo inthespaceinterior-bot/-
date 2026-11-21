@@ -15,7 +15,7 @@ THE GWANGAN · 네이버 예약 달력 동기화
   stock <= bookingCount          -> 재고 소진(이미 예약됨)     => "sold"
   그 외                          -> 예약 가능                    => "open"
 """
-import json, sys, time, urllib.request, urllib.error, datetime, argparse, os
+import json, sys, re, time, urllib.request, urllib.error, datetime, argparse, os
 
 BUSINESS_ID = '842506'
 BIZ_ITEM_ID = '4858363'
@@ -116,6 +116,30 @@ def js_table(sync, indent='  '):
     return '\n'.join(lines)
 
 
+def patch_app_js(sync, path):
+    """app.js 안의 NAVER 표와 OPEN_UNTIL 을 방금 받은 값으로 교체(오프라인 대체값 최신화)."""
+    src = open(path, encoding='utf-8').read()
+    try:
+        i = src.index('const NAVER = {')
+        j = src.index('};', i) + 2
+    except ValueError:
+        return False
+    new = ('const NAVER = {\n'
+           '  /* 네이버 예약(업체 842506 / 상품 4858363) 실시간 조회 값 — naver-sync.py 가 갱신 */\n'
+           + js_table(sync) + '\n};')
+    changed = (src[i:j] != new)
+    if changed:
+        src = src[:i] + new + src[j:]
+    if sync.get('openUntil'):
+        src2 = re.sub(r"let OPEN_UNTIL = '\d{4}-\d{2}-\d{2}';",
+                      "let OPEN_UNTIL = '%s';" % sync['openUntil'], src, count=1)
+        if src2 != src:
+            src = src2; changed = True
+    if changed:
+        open(path, 'w', encoding='utf-8').write(src)
+    return changed
+
+
 if __name__ == '__main__':
     ap = argparse.ArgumentParser()
     ap.add_argument("--days", type=int, default=105)
@@ -123,6 +147,7 @@ if __name__ == '__main__':
     ap.add_argument('--print', action='store_true')
     ap.add_argument('--verbose', action='store_true')
     ap.add_argument('--js', action='store_true', help='print JS constant body instead of JSON')
+    ap.add_argument('--patch-app', action='store_true', help='also update the NAVER table in app.js beside this script')
     a = ap.parse_args()
     sync = scrape(a.days, a.verbose)
     if a.js:
@@ -135,3 +160,9 @@ if __name__ == '__main__':
         n = len(sync['days'])
         opens = sum(1 for v in sync['days'].values() if v[1] == 'open')
         print(f'saved {a.out} · {n} days · open {opens} · openUntil {sync["openUntil"]} · updatedAt {sync["updatedAt"]}')
+        if a.patch_app:
+            app = os.path.join(os.path.dirname(os.path.abspath(a.out)), 'app.js')
+            if os.path.exists(app):
+                print('app.js patched' if patch_app_js(sync, app) else 'app.js already current')
+            else:
+                print('app.js not found:', app)
