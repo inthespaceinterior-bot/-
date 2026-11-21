@@ -1,0 +1,191 @@
+[
+ {
+  "src": "p01.webp",
+  "cat": "living",
+  "ko": "오션뷰 거실 & 아일랜드 주방",
+  "en": "Ocean-view living & island kitchen",
+  "zh": "海景客廳與中島廚房"
+ },
+ {
+  "src": "p02.webp",
+  "cat": "living",
+  "ko": "거실 라운지",
+  "en": "Living lounge",
+  "zh": "客廳休憩區"
+ },
+ {
+  "src": "p03.webp",
+  "cat": "living",
+  "ko": "밤바다 뷰 거실",
+  "en": "Living room at night",
+  "zh": "夜景客廳"
+ },
+ {
+  "src": "p04.webp",
+  "cat": "living",
+  "ko": "100인치 빔스크린",
+  "en": "100-inch projection screen",
+  "zh": "100 吋投影螢幕"
+ },
+ {
+  "src": "p05.webp",
+  "cat": "kitchen",
+  "ko": "아일랜드 주방",
+  "en": "Island kitchen",
+  "zh": "中島廚房"
+ },
+ {
+  "src": "p06.webp",
+  "cat": "kitchen",
+  "ko": "주방 전경",
+  "en": "Kitchen, wide view",
+  "zh": "廚房全景"
+ },
+ {
+  "src": "p07.webp",
+  "cat": "kitchen",
+  "ko": "바다 보이는 다이닝",
+  "en": "Dining with a sea view",
+  "zh": "面海餐桌"
+ },
+ {
+  "src": "p08.webp",
+  "cat": "kitchen",
+  "ko": "12인 다이닝테이블",
+  "en": "12-seat dining table",
+  "zh": "12 人餐桌"
+ },
+ {
+  "src": "p09.webp",
+  "cat": "bed1",
+  "ko": "침실 1",
+  "en": "Bedroom 1",
+  "zh": "臥室 1"
+ },
+ {
+  "src": "p10.webp",
+  "cat": "bed1",
+  "ko": "침실 1 · 창가",
+  "en": "Bedroom 1 by the window",
+  "zh": "臥室 1・窗邊"
+ },
+ {
+  "src": "p11.webp",
+  "cat": "bed2",
+  "ko": "침실 2 · 킹베드 2",
+  "en": "Bedroom 2 · two king beds",
+  "zh": "臥室 2・兩張特大床"
+ },
+ {
+  "src": "p12.webp",
+  "cat": "bed2",
+  "ko": "침실 2",
+  "en": "Bedroom 2",
+  "zh": "臥室 2"
+ },
+ {
+  "src": "p13.webp",
+  "cat": "bed3",
+  "ko": "침실 3 · 킹베드 2",
+  "en": "Bedroom 3 · two king beds",
+  "zh": "臥室 3・兩張特大床"
+ },
+ {
+  "src": "p14.webp",
+  "cat": "bed3",
+  "ko": "침실 3",
+  "en": "Bedroom 3",
+  "zh": "臥室 3"
+ },
+ {
+  "src": "p15.webp",
+  "cat": "bath1",
+  "ko": "욕실 1 · 샤워",
+  "en": "Bathroom 1 · shower",
+  "zh": "衛浴 1・淋浴"
+ },
+ {
+  "src": "p16.webp",
+  "cat": "bath1",
+  "ko": "욕실 1 · 세면",
+  "en": "Bathroom 1 · vanity",
+  "zh": "衛浴 1・洗手台"
+ },
+ {
+  "src": "p17.webp",
+  "cat": "bath2",
+  "ko": "욕실 2 · 세면",
+  "en": "Bathroom 2 · vanity",
+  "zh": "衛浴 2・洗手台"
+ },
+ {
+  "src": "p18.webp",
+  "cat": "bath2",
+  "ko": "욕실 2",
+  "en": "Bathroom 2",
+  "zh": "衛浴 2"
+ },
+ {
+  "src": "p19.webp",
+  "cat": "entry",
+  "ko": "현관",
+  "en": "Entrance",
+  "zh": "玄關"
+ },
+ {
+  "src": "p20.webp",
+  "cat": "entry",
+  "ko": "세탁실",
+  "en": "Laundry",
+  "zh": "洗衣間"
+ },
+ {
+  "src": "p21.webp",
+  "cat": "pool",
+  "ko": "자쿠지 · 야경",
+  "en": "Jacuzzi at night",
+  "zh": "按摩浴缸・夜景"
+ },
+ {
+  "src": "p22.webp",
+  "cat": "pool",
+  "ko": "오션뷰 온수풀",
+  "en": "Heated pool with ocean view",
+  "zh": "海景溫水泳池"
+ },
+ {
+  "src": "p23.webp",
+  "cat": "pool",
+  "ko": "노을 진 온수풀",
+  "en": "Heated pool at sunset",
+  "zh": "夕陽下的溫水泳池"
+ },
+ {
+  "src": "p24.webp",
+  "cat": "kids",
+  "ko": "키즈룸",
+  "en": "Kids’ room",
+  "zh": "兒童房"
+ },
+ {
+  "src": "p25.webp",
+  "cat": "kids",
+  "ko": "키즈룸 · 트램폴린",
+  "en": "Kids’ room · trampoline",
+  "zh": "兒童房・彈跳床"
+ },
+ {
+  "src": "p26.webp",
+  "cat": "cinema",
+  "ko": "영화관 (빔스크린)",
+  "en": "Cinema corner",
+  "zh": "影院角落"
+ },
+ {
+  "src": "p27.webp",
+  "cat": "event",
+  "ko": "이벤트룸",
+  "en": "Event room",
+  "zh": "活動空間"
+ }
+]

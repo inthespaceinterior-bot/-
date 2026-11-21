@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>THE GWANGAN · 더광안 | 광안리 오션뷰 풀빌라 예약</title>
+<meta name="description" content="광안리 해변 도보 1분, 60평 독채 오션뷰 풀빌라 더광안. 실내 온수풀·자쿠지·키즈룸. 네이버 예약 실제 요금 기준 실시간 견적과 예약." />
+<meta name="theme-color" content="#0B1628" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="THE GWANGAN" />
+<link rel="icon" type="image/png" href="assets/app-icon.png" />
+<link rel="apple-touch-icon" href="assets/app-icon.png" />
+<link rel="manifest" href="manifest.webmanifest" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="#top"><b>THE GWANGAN</b><span>Busan · Gwangalli</span></a>
+    <nav class="nav">
+      <a href="#about">숙소 소개</a>
+      <a href="#gallery">사진</a>
+      <a href="#rates">요금</a>
+      <a href="#reviews">후기</a>
+      <a href="#location">위치·이용안내</a>
+    </nav>
+    <button class="btn gold head-cta" onclick="goBook()">예약하기</button>
+    <button class="btn light" onclick="openMine()">내 예약</button>
+    <button class="btn light" onclick="openHost()">호스트</button>
+    <div class="lang-sw" role="group" aria-label="Language">
+      <button data-lang="ko" onclick="setLang('ko')">한국어</button>
+      <button data-lang="en" onclick="setLang('en')">English</button>
+      <button data-lang="zh" onclick="setLang('zh')">繁體中文</button>
+    </div>
+  </div>
+</header>
+
+<div class="searchbar">
+  <div class="wrap">
+    <div class="sb-cell">
+      <label>체크인</label>
+      <input type="date" id="sbIn" min="2026-11-21" onchange="sbChanged()">
+      <div class="hint" id="sbInHint" data-dyn>날짜 선택</div>
+    </div>
+    <div class="sb-cell">
+      <label>체크아웃</label>
+      <input type="date" id="sbOut" onchange="sbChanged()">
+      <div class="hint" id="sbOutHint" data-dyn>날짜 선택</div>
+    </div>
+    <div class="sb-cell">
+      <label>인원</label>
+      <select id="sbGuests" onchange="sbChanged()">
+        <option value="2">성인 2명</option>
+        <option value="4">성인 4명</option>
+        <option value="6">성인 6명</option>
+        <option value="8" selected>성인 8명 (기준)</option>
+        <option value="10">성인 10명</option>
+        <option value="12">성인 12명 (최대)</option>
+      </select>
+      <div class="hint" id="sbSum" data-dyn>기준 8인 · 최대 12인</div>
+    </div>
+    <div class="sb-go"><button class="btn" onclick="goBook()">요금 확인</button></div>
+  </div>
+</div>
+
+<main id="top">
+
+<section class="hero">
+  <div class="hero-media"><img src="assets/p01.webp" alt="더광안 오션뷰 거실"></div>
+  <div class="wrap hero-inner">
+    <div class="hero-badges">
+      <span class="pill solid">★ 4.95 · 후기 176</span>
+      <span class="pill">게스트 선호 · 상위 10%</span>
+      <span class="pill">슈퍼호스트 · 응답률 100%</span>
+      <span class="pill">생활숙박업 제2023-00012호</span>
+    </div>
+    <h1 class="serif">광안리에 감성을 더하다, <em>더광안</em></h1>
+    <p class="hero-sub">광안리 해변까지 도보 1분. 60평 독채에 실내 온수풀과 자쿠지, 100인치 빔스크린, 아이들을 위한 키즈룸까지 — 바다를 품은 프라이빗 스테이.</p>
+    <div class="hero-facts">
+      <div><span>Guests</span><b>8인 기준 · 최대 12인</b></div>
+      <div><span>Bedrooms</span><b>침실 3 · 킹베드 5</b></div>
+      <div><span>Check-in / out</span><b>15:00 / 11:00</b></div>
+      <div class="hero-price"><span>1박 요금</span><b>500,000원~</b><em>네이버 예약 실시간 요금 기준</em></div>
+    </div>
+  </div>
+</section>
+
+<section class="section tight">
+  <div class="wrap">
+    <div class="eyebrow">The Stay</div>
+    <h2 style="font-size:32px;margin-top:10px">광안리에서 가장 특별한 60평</h2>
+    <div class="hl-grid">
+      <div class="hl">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M2 17c2 0 2-1.5 4-1.5S8 17 10 17s2-1.5 4-1.5S16 17 18 17s2-1.5 4-1.5"/><path d="M2 21c2 0 2-1.5 4-1.5S8 21 10 21s2-1.5 4-1.5S16 21 18 21s2-1.5 4-1.5"/><circle cx="17" cy="7" r="3"/><path d="M3 14V6a2 2 0 0 1 2-2h6"/></svg>
+        <h4>광안리 해변 도보 1분</h4>
+        <p>창을 열면 광안대교와 바다. 밀락더마켓 도보 5분, 민락수변공원 도보 10분.</p>
+      </div>
+      <div class="hl">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M3 15h18"/><path d="M3 15V9a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v6"/><path d="M6 19v-4M18 19v-4"/><path d="M8 9h.01M12 9h.01M16 9h.01"/></svg>
+        <h4>실내 온수풀 · 자쿠지</h4>
+        <p>사계절 24시간 이용 가능한 사설 실내 온수풀. 자쿠지 온수는 무료입니다.</p>
+      </div>
+      <div class="hl">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="6" y="3" width="12" height="8" rx="2"/><path d="M3 21v-6a3 3 0 0 1 3-3h12a3 3 0 0 1 3 3v6"/><path d="M8 16h8"/></svg>
+        <h4>키즈룸 무료 오픈</h4>
+        <p>대형 트램폴린존, 주방놀이, 원목장난감, 32인치 좌식 게임기, 붕붕카.</p>
+      </div>
+      <div class="hl">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        <h4>100인치 빔스크린</h4>
+        <p>거실 2개 — 100인치 빔스크린과 65인치 TV. 넷플릭스·유튜브 시청 가능.</p>
+      </div>
+      <div class="hl">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 20V9l8-5 8 5v11"/><path d="M9 20v-6h6v6"/></svg>
+        <h4>12인 다이닝 & 아일랜드 주방</h4>
+        <p>바다가 보이는 대형 식탁. 얼음정수기·커피머신·에어프라이어 등 풀 셋업.</p>
+      </div>
+      <div class="hl">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 3l2.4 5.2 5.6.7-4.1 3.9 1 5.6L12 15.8 7.1 18.4l1-5.6L4 8.9l5.6-.7z"/></svg>
+        <h4>4.95점 · 후기 176개</h4>
+        <p>청결도 5.0 · 정확도 5.0 · 체크인 5.0 · 의사소통 5.0 (에어비앤비 기준)</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="about" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+  <div class="wrap split">
+    <div>
+      <div class="eyebrow">About the house</div>
+      <h2 style="font-size:34px;margin:12px 0 22px">바다 앞 60평 독채,<br>단 한 팀만을 위한 공간</h2>
+      <p class="lead">광안리 바닷가 바로 앞에 위치한 <strong>합법적으로 운영하는 생활숙박업 숙소</strong>입니다. 현관을 지나면 두 개의 거실과 바다가 보이는 아일랜드 주방, 12인이 앉는 대형 식탁이 이어집니다. 화이트톤 자쿠지에서는 광안대교의 노을과 밤바다를, 침실 세 개에서는 조용한 휴식을. 아이가 있다면 대형 트램폴린과 원목 장난감이 있는 키즈룸을 무료로 열어드립니다.</p>
+      <ul class="spec-list">
+        <li><span>유형</span><b>독채 · 60평대 · 생활숙박업</b></li>
+        <li><span>인원</span><b>기준 8인 / 최대 12인 (초과 1인당 30,000원, 24개월 미만 무료)</b></li>
+        <li><span>침실</span><b>침실 3 — 킹사이즈 베드 총 5개</b></li>
+        <li><span>욕실</span><b>욕실 2 (세면대·샤워기·휴젠트)</b></li>
+        <li><span>체크인</span><b>오후 3:00 / 체크아웃 오전 11:00 · 셀프 체크인(키패드)</b></li>
+        <li><span>주차</span><b>전통시장 공영주차장 1대 무료 · 지하 1층 1대(협소) — 사전 문의</b></li>
+        <li><span>등록</span><b>부산광역시 수영구 · 생활숙박업 제2023-00012호</b></li>
+      </ul>
+      <div class="amen">
+        <span>사설 실내 온수풀</span><span>자쿠지 · 월풀</span><span>오션뷰</span><span>100인치 빔스크린</span>
+        <span>넷플릭스</span><span>65인치 TV</span><span>마샬 스피커</span><span>아일랜드 주방</span>
+        <span>얼음정수기</span><span>커피머신 · 원두</span><span>에어프라이어</span><span>식기 · 유아식기</span>
+        <span>드럼세탁기 · 건조기</span><span>공기청정기</span><span>샤워가운 · 어메니티</span><span>유아욕조 · 젖병소독기</span>
+        <span>와이파이</span><span>무료 주차</span><span>단체 · 파티 가능</span><span>금연 · 반려동물 불가</span>
+      </div>
+    </div>
+    <div class="about-img">
+      <img src="assets/p07.webp" alt="광안대교가 보이는 다이닝">
+      <div class="cap">노을과 야경이 그대로 들어오는 창가 다이닝</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="gallery">
+  <div class="wrap">
+    <div class="gal-head">
+      <div>
+        <div class="eyebrow">Gallery</div>
+        <h2 style="font-size:32px;margin-top:10px">실제 숙소 사진</h2>
+        <p style="color:var(--muted);font-size:12.5px;margin:8px 0 0">거실 · 침실 1~3 · 욕실 1~2 · 온수풀 · 키즈룸 · 주방까지 공간별로 골라 보세요.</p>
+      </div>
+      <button class="btn ghost" onclick="openLightbox('all')">사진 <b id="galCount">27</b>장 모두 보기</button>
+    </div>
+    <div class="gal" id="galMosaic" data-dyn></div>
+    <p style="font-size:12px;color:var(--muted);margin-top:12px">사진 출처: 더광안 에어비앤비 공식 리스팅(숙소 819331064728703944) — 호스트가 직접 촬영·등록한 실제 숙소 사진이며, 공간 구분은 리스팅의 사진 투어 분류를 따랐습니다.</p>
+  </div>
+</section>
+
+<section class="section rates" id="rates">
+  <div class="wrap">
+    <div class="eyebrow">Rates</div>
+    <h2 style="font-size:32px;margin-top:10px">요금 안내</h2>
+    <p style="color:rgba(255,255,255,.66);max-width:66ch;margin-top:12px;font-size:14px">아래 요금은 <b style="color:#fff">네이버 예약(더광안 · 업체 842506) 달력에서 실제로 확인한 1박 요금</b>을 정리한 것입니다. 날짜별 요금이 다르므로, 예약 달력에서 선택하신 날짜의 정확한 금액이 자동 계산됩니다.</p>
+    <div class="rate-grid">
+      <div>
+        <table class="rate">
+          <thead><tr><th>기간</th><th></th><th>일</th><th>월~목</th><th>금</th><th>토</th></tr></thead>
+          <tbody>
+            <tr><td data-i18n="2026년 11월">2026년 11월</td><td data-i18n="비수기">비수기</td><td><b>600,000</b></td><td><b>500,000</b></td><td><b>700,000</b></td><td><b>700,000</b></td></tr>
+            <tr><td data-i18n="2026년 12월">2026년 12월</td><td data-i18n="준성수기">준성수기</td><td><b>700,000</b></td><td><b>600,000</b></td><td><b>700,000</b></td><td><b>1,000,000</b></td></tr>
+            <tr class="hi"><td data-i18n="2027년 1월">2027년 1월</td><td data-i18n="성수기">성수기</td><td><b>700,000</b></td><td><b>600,000</b></td><td><b>700,000</b></td><td><b>1,200,000</b></td></tr>
+            <tr><td>특수일</td><td colspan="4" style="text-align:left;font-size:12.5px;color:rgba(255,255,255,.75)">성탄 전일(12/24) 800,000원 · 설 연휴 기간은 별도 요금</td></tr>
+          </tbody>
+        </table>
+        <p class="note">· 표시 요금은 1박 기준이며, 실제 판매 여부는 날짜마다 다릅니다(마감 다수).<br>
+        · 2027년 2월 7일 이후는 아직 판매가 열려 있지 않아 온라인 예약 대신 문의로 안내합니다.<br>
+        · 요금은 호스트 사정에 따라 변경될 수 있으며, 결제 직전 견적 화면의 금액이 최종 금액입니다.<br>
+        · 외국인 게스트 참고 환율: US$1 ≈ 1,346원 · NT$1 ≈ 40.45원 (2026-11-20 기준)</p>
+        <div class="rulebox" style="margin-top:22px">
+          <h4>추가 요금</h4>
+          <ul>
+            <li><span>기준 인원</span><b>8인</b></li>
+            <li><span>인원 추가 (1인·1박)</span><b>30,000원</b></li>
+            <li><span>24개월 미만 영유아</span><b>무료</b></li>
+            <li><span>키즈룸</span><b>30,000원 <small style="color:var(--gold)">· 무료 쿠폰 적용 가능</small></b></li>
+            <li><span>자쿠지 온수</span><b>무료</b></li>
+            <li><span>연박 할인</span><b>2박 이상 시 추가 1박당 −50,000원</b></li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div class="rulebox">
+          <h4>예약 규정</h4>
+          <ul>
+            <li><span>체크인</span><b>오후 3:00</b></li>
+            <li><span>체크아웃</span><b>오전 11:00</b></li>
+            <li><span>최대 인원</span><b>12인</b></li>
+            <li><span>반려동물</span><b>동반 불가</b></li>
+            <li><span>흡연</span><b>전 구역 금연 (과태료 10만원)</b></li>
+            <li><span>파티</span><b>가능 (창문 테이프 부착 금지)</b></li>
+            <li><span>미성년자</span><b>직계 보호자 동반 필수</b></li>
+          </ul>
+        </div>
+        <div class="rulebox" style="margin-top:18px">
+          <h4>취소·환불</h4>
+          <ul><li><span>정책</span><b>예약 전 호스트 확인</b></li></ul>
+          <p class="note" style="margin-top:10px">네이버 예약·에어비앤비 모두 취소 규정을 예약 단계에서만 노출하고 있어 이 페이지에는 게시되어 있지 않습니다. 취소·환불은 예약 채널의 규정이 우선하며, 문의는 네이버 톡톡 또는 010-2650-0013으로 부탁드립니다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="booking" style="background:var(--ivory)">
+  <div class="wrap">
+    <div class="eyebrow">Reservation</div>
+    <h2 style="font-size:32px;margin:10px 0 8px">날짜를 고르면 요금이 바로 계산됩니다</h2>
+    <p style="color:var(--muted);font-size:13.5px;margin:0 0 26px">요금·마감 상태는 네이버 예약 달력에서 2026-11-21 기준으로 확인한 실제 값입니다.</p>
+    <div class="book-grid">
+      <div>
+        <div class="cal-toolbar">
+          <div class="mon" id="calTitle" data-dyn>2026년 11월</div>
+          <div class="cal-nav">
+            <button onclick="shiftMonth(-1)" aria-label="이전 달">‹</button>
+            <button onclick="shiftMonth(1)" aria-label="다음 달">›</button>
+          </div>
+        </div>
+        <div class="cal-months">
+          <div class="cal" id="cal1" data-dyn></div>
+          <div class="cal" id="cal2" data-dyn></div>
+        </div>
+        <div class="legend">
+          <span><i class="l-open"></i>예약 가능</span>
+          <span><i class="l-sel"></i>선택</span>
+          <span><i class="l-off"></i>마감 · 판매중지</span>
+          <span>숫자 아래는 1박 요금</span>
+        </div>
+        <div class="sel-line">
+          <div><span>체크인</span><b id="selIn" data-dyn>—</b></div>
+          <div><span>체크아웃</span><b id="selOut" data-dyn>—</b></div>
+          <div><span>숙박</span><b id="selNights" data-dyn>—</b></div>
+        </div>
+        <div style="margin-top:18px;background:#fff;border:1px solid var(--line);padding:8px 20px 14px">
+          <div class="guests-row">
+            <div class="lab">성인 <small>만 13세 이상</small></div>
+            <div class="stepper"><button onclick="stepGuest('adults',-1)">−</button><b id="gAdults">8</b><button onclick="stepGuest('adults',1)">+</button></div>
+          </div>
+          <div class="guests-row">
+            <div class="lab">아동 <small>만 2~12세 · 기준 인원에 포함</small></div>
+            <div class="stepper"><button onclick="stepGuest('children',-1)">−</button><b id="gChildren">0</b><button onclick="stepGuest('children',1)">+</button></div>
+          </div>
+          <div class="guests-row" style="border-bottom:0">
+            <div class="lab">유아 <small>24개월 미만 · 추가 요금 없음</small></div>
+            <div class="stepper"><button onclick="stepGuest('infants',-1)">−</button><b id="gInfants">0</b><button onclick="stepGuest('infants',1)">+</button></div>
+          </div>
+        </div>
+      </div>
+      <aside class="quote" id="quoteCard" data-dyn>
+        <div class="qhead"><b>예약 견적</b><span id="qBadge">날짜 선택</span></div>
+        <div class="qbody" id="qBody">
+          <p style="font-size:13px;color:var(--muted);margin:4px 0 8px">달력에서 체크인·체크아웃 날짜를 선택해 주세요.</p>
+          <div class="qline"><span>1박 요금</span><b>—</b></div>
+        </div>
+        <div class="qtotal"><span id="qTotalLab">총 결제 금액</span><b id="qTotal">—</b></div>
+        <div class="qfx" id="qFx"></div>
+        <div class="qfoot">
+          <button class="btn gold wide" id="qBtn" onclick="startBooking()" disabled>예약하기</button>
+          <p class="qnote">결제 수단: 신용·체크카드 / 해외카드(Visa·Mastercard·JCB) / PayPal / 계좌이체(무통장). 예약 확정 시 해당 날짜는 자동으로 마감됩니다.</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="reviews" style="background:#fff;border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="rev-head">
+      <div class="rev-score">4.95</div>
+      <div>
+        <div class="eyebrow">Guest reviews</div>
+        <div style="font-size:15px;margin-top:6px">에어비앤비 후기 <b>176개</b> · 게스트 선호 · 슈퍼호스트</div>
+        <div style="font-size:12.5px;color:var(--muted);margin-top:4px">청결도 5.0 · 정확도 5.0 · 체크인 5.0 · 의사소통 5.0 · 위치 4.9 · 가격 대비 4.9</div>
+      </div>
+    </div>
+    <div class="rev-grid" id="revGrid" data-dyn></div>
+    <div class="rev-foot">
+      <span class="rev-loc" id="revNote" data-dyn></span>
+      <a class="btn ghost" href="https://www.airbnb.co.kr/rooms/819331064728703944#reviews" target="_blank" rel="noopener">에어비앤비 후기 176개 전체 보기 ↗</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="location">
+  <div class="wrap loc">
+    <div>
+      <div class="eyebrow">Location</div>
+      <h2 style="font-size:30px;margin:10px 0 20px">광안리 해변 바로 앞</h2>
+      <dl>
+        <dt>주소</dt><dd>부산광역시 수영구 민락수변로 13, 7층 <span style="color:var(--muted);font-size:12.5px">(1층 송원 · 8층 진주횟집 건물)</span></dd>
+        <dt>도보 거리</dt><dd>광안리해수욕장 1분 · 밀락더마켓 5분 · 민락수변공원 10분</dd>
+        <dt>주차</dt><dd>전통시장 공영주차장 1대 무료 · 건물 지하 1층 1대(층고 낮고 협소) — 사전 문의</dd>
+        <dt>문의</dt><dd>010-2650-0013 · 네이버 톡톡</dd>
+        <dt>예약 채널</dt><dd>네이버 예약 · 에어비앤비 · 본 페이지</dd>
+      </dl>
+      <div class="map-wrap">
+        <iframe title="더광안 위치 지도" src="https://maps.google.com/maps?q=%EB%B6%80%EC%82%B0%EA%B4%91%EC%97%AD%EC%8B%9C%20%EC%88%98%EC%98%81%EA%B5%AC%20%EB%AF%BC%EB%9D%BD%EC%88%98%EB%B3%80%EB%A1%9C%2013&z=16&hl=ko&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div class="map-links">
+          <a href="https://www.google.com/maps/search/?api=1&query=%EB%B6%80%EC%82%B0%EA%B4%91%EC%97%AD%EC%8B%9C+%EC%88%98%EC%98%81%EA%B5%AC+%EB%AF%BC%EB%9D%BD%EC%88%98%EB%B3%80%EB%A1%9C+13" target="_blank" rel="noopener">구글 지도에서 크게 보기 ↗</a>
+          <a href="https://www.google.com/maps/dir/?api=1&destination=%EB%B6%80%EC%82%B0%EA%B4%91%EC%97%AD%EC%8B%9C+%EC%88%98%EC%98%81%EA%B5%AC+%EB%AF%BC%EB%9D%BD%EC%88%98%EB%B3%80%EB%A1%9C+13" target="_blank" rel="noopener">길찾기 ↗</a>
+        </div>
+      </div>
+    </div>
+    <div class="faq">
+      <div class="eyebrow">Good to know</div>
+      <h2 style="font-size:30px;margin:10px 0 20px">이용 안내</h2>
+      <details open><summary>체크인·체크아웃 시간은?</summary><p>체크인 오후 3시, 체크아웃 오전 11시입니다. 셀프 체크인(키패드)으로 이용하실 수 있습니다.</p></details>
+      <details><summary>인원 추가 요금은 얼마인가요?</summary><p>기준 8인이며 최대 12인까지 가능합니다. 기준 인원 초과 시 1인당 30,000원이 추가되고, 24개월 미만 영유아는 추가 요금이 없습니다. 숙박하지 않는 방문객도 1인 3만원이 발생합니다.</p></details>
+      <details><summary>키즈룸과 온수풀은 유료인가요?</summary><p>키즈룸은 30,000원 옵션이지만 현재 ‘키즈룸·자쿠지 무료 사용 쿠폰’이 배포 중이어서 예약 시 무료로 적용됩니다. 자쿠지 온수는 무료입니다.</p></details>
+      <details><summary>취소·환불은 어떻게 되나요?</summary><p>취소 규정은 예약한 채널(네이버 예약 / 에어비앤비 / 본 페이지)의 정책이 적용됩니다. 본 페이지 예약은 예약 전 호스트 확인이 필요하며, 문의는 010-2650-0013으로 주시면 안내드립니다.</p></details>
+      <details><summary>반려동물과 함께 갈 수 있나요?</summary><p>쾌적한 숙소 환경을 위해 반려동물 동반은 불가합니다. 숙소 전체가 금연 구역입니다.</p></details>
+      <details><summary>파티나 촬영도 가능한가요?</summary><p>파티는 가능하지만 창문에 테이프를 붙이는 행위는 금지됩니다(원상복귀 불가 시 배상). 전열기구·버너·숯·양초 사용은 금지입니다.</p></details>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <b>THE GWANGAN</b>
+        <div style="margin-top:10px">부산광역시 수영구 민락수변로 13, 7층</div>
+        <div>생활숙박업 제2023-00012호 · 부산광역시 수영구</div>
+        <div>문의 010-2650-0013 · thegwangan</div>
+      </div>
+      <div>
+        <div style="color:#fff;margin-bottom:8px">예약·안내</div>
+        <div class="foot-links">
+          <a href="https://m.booking.naver.com/booking/3/bizes/842506/items/4858363" target="_blank" rel="noopener">네이버 예약</a>
+          <a href="https://www.airbnb.co.kr/rooms/819331064728703944" target="_blank" rel="noopener">에어비앤비</a>
+          <a href="#rates">요금표</a>
+          <a href="#location">이용 안내</a>
+        </div>
+      </div>
+      <div style="max-width:320px">이 페이지는 더광안 예약을 위한 시연용 웹앱입니다. 실제 결제(카드 승인·입금)는 이루어지지 않으며, 실서비스 전환 시 PG 가맹점 연동과 입금 확인 서버가 필요합니다.</div>
+    </div>
+    <div style="margin-top:34px;border-top:1px solid rgba(255,255,255,.12);padding-top:16px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap">
+      <span>© 2026 THE GWANGAN. All rights reserved.</span>
+      <span>사진 © 더광안 · 에어비앤비 공식 리스팅</span>
+    </div>
+  </div>
+</footer>
+
+<div class="modal" id="lbModal">
+  <div class="veil" onclick="closeModal('lbModal')"></div>
+  <div class="sheet lb">
+    <div class="sheet-head"><h3>숙소 사진 <span style="font-size:12px;color:rgba(255,255,255,.55);font-family:var(--sans)" id="lbCount"></span></h3><button class="x" onclick="closeModal('lbModal')">✕</button></div>
+    <div class="chips" id="lbChips" data-dyn></div>
+    <div class="lb-grid" id="lbGrid" data-dyn></div>
+  </div>
+</div>
+<div class="viewer" id="viewer">
+  <button class="close" onclick="closeViewer()">✕</button>
+  <button class="nav prev" onclick="viewerStep(-1)">‹</button>
+  <img id="viewerImg" alt="">
+  <div class="cap" id="viewerCap"></div>
+  <button class="nav next" onclick="viewerStep(1)">›</button>
+</div>
+
+<div class="modal" id="bookModal">
+  <div class="veil" onclick="closeBooking()"></div>
+  <div class="sheet">
+    <div class="sheet-head"><h3>예약 진행</h3><button class="x" onclick="closeBooking()">✕</button></div>
+    <div class="steps">
+      <div class="on" id="st1">01 예약 정보</div>
+      <div id="st2">02 결제 수단</div>
+      <div id="st3">03 완료</div>
+    </div>
+    <div class="pane" id="bkPane" data-dyn></div>
+  </div>
+</div>
+
+<div class="modal" id="pgModal">
+  <div class="veil"></div>
+  <div class="sheet pg">
+    <div class="sheet-head"><h3 id="pgTitle">카드 결제</h3><button class="x" onclick="closeModal('pgModal')">✕</button></div>
+    <div class="pg-body" id="pgBody" data-dyn></div>
+  </div>
+</div>
+
+<div class="modal" id="mineModal">
+  <div class="veil" onclick="closeModal('mineModal')"></div>
+  <div class="sheet narrow">
+    <div class="sheet-head"><h3>내 예약</h3><button class="x" onclick="closeModal('mineModal')">✕</button></div>
+    <div class="sheet-body" id="mineBody" data-dyn></div>
+  </div>
+</div>
+
+<div class="modal" id="hostModal">
+  <div class="veil" onclick="closeModal('hostModal')"></div>
+  <div class="sheet wide">
+    <div class="sheet-head"><h3>호스트 패널 · 채널 동기화</h3><button class="x" onclick="closeModal('hostModal')">✕</button></div>
+    <div class="tabs">
+      <button class="on" onclick="hostTab('cal',this)">통합 캘린더</button>
+      <button onclick="hostTab('ical',this)">iCal 동기화</button>
+      <button onclick="hostTab('res',this)">예약 관리</button>
+      <button onclick="hostTab('cfg',this)">요금·계좌</button>
+      <button onclick="hostTab('guide',this)">연동 가이드</button>
+    </div>
+    <div class="hp" id="hostBody" data-dyn></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="app.js"></script>
+</body>
+</html>
