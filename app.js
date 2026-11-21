@@ -1004,16 +1004,72 @@ function openViewer(i){
   viewerIdx=i; const p=viewerList[i];
   document.getElementById('viewerImg').src='assets/'+p.s+'.webp';
   document.getElementById('viewerCap').textContent=pt(p)+'  ('+(i+1)+'/'+viewerList.length+')';
-  document.getElementById('viewer').classList.add('show');
+  const v=document.getElementById('viewer');
+  if(!v.classList.contains('show')){ v.classList.add('show'); tgPush('viewer'); }
 }
 function viewerStep(d){
   viewerIdx = (viewerIdx+d+viewerList.length)%viewerList.length; openViewer(viewerIdx);
 }
-function closeViewer(){ document.getElementById('viewer').classList.remove('show'); }
+function closeViewer(){
+  const v=document.getElementById('viewer');
+  if(!v.classList.contains('show')) return;
+  v.classList.remove('show');
+  const i=TG_LAYERS.lastIndexOf('viewer'); if(i>=0) TG_LAYERS.splice(i,1);
+  tgSync();
+}
+
+/* ═══════════════════════════════════════════════════════════
+   브라우저 뒤로가기(popstate) ↔ 모달·라이트박스 연동
+   · 모달·라이트박스를 열 때마다 history.pushState({tg:깊이})로 기록을 쌓는다.
+   · 사용자가 브라우저 ← / 모바일 스와이프 뒤로가기를 누르면(popstate)
+     그 기록 깊이까지만 레이어를 위에서부터 차례로 닫는다(페이지 이탈 없음).
+   · ✕·배경 클릭·Esc로 닫으면 남은 기록만큼 history.go(-n)으로 정리해
+     히스토리가 꼬이지 않게 한다.
+   ═══════════════════════════════════════════════════════════ */
+const TG_LAYERS=[];              /* 열린 레이어 이름 목록(아래→위) */
+let TG_PENDING=0, TG_TIMER=null; /* 우리가 요청한 history.go(-n) 누적 / 디바운스 타이머 */
+function tgDepth(){ const s=history.state; return (s && typeof s.tg==='number') ? s.tg : 0; }
+function tgPush(name){
+  TG_LAYERS.push(name);
+  try{ history.pushState({tg:TG_LAYERS.length}, ''); }catch(e){}
+}
+function tgSync(){ if(TG_TIMER) return; TG_TIMER=setTimeout(function(){ TG_TIMER=null; tgSyncNow(); },0); }
+function tgSyncNow(){
+  const diff = (tgDepth()-TG_PENDING) - TG_LAYERS.length;
+  if(diff>0){ TG_PENDING+=diff; try{ history.go(-diff); }catch(e){ TG_PENDING-=diff; } }
+}
+function tgHideDom(name){
+  if(name==='viewer'){ document.getElementById('viewer').classList.remove('show'); return; }
+  const el=document.getElementById(name); if(!el) return;
+  el.classList.remove('show');
+  if(name==='bookModal'){
+    try{ captureBookInputs(); }catch(e){}
+    try{ renderCals(); renderQuote(); }catch(e){}
+  }
+  if(!document.querySelector('.modal.show')) document.body.style.overflow='';
+}
+function tgCloseTop(){ const name=TG_LAYERS.pop(); if(name) tgHideDom(name); }
+window.addEventListener('popstate', function(){
+  TG_PENDING=0;
+  const depth=tgDepth();
+  let guard=0;
+  while(TG_LAYERS.length>depth && guard++<12) tgCloseTop();
+  if(!document.querySelector('.modal.show')) document.body.style.overflow='';
+});
 
 /* ── modal helpers ── */
-function openModal(id){ document.getElementById(id).classList.add('show'); document.body.style.overflow='hidden'; }
-function closeModal(id){ document.getElementById(id).classList.remove('show'); if(!document.querySelector('.modal.show')) document.body.style.overflow=''; }
+function openModal(id){
+  const el=document.getElementById(id); if(!el) return;
+  if(!el.classList.contains('show')){ el.classList.add('show'); tgPush(id); }
+  document.body.style.overflow='hidden';
+}
+function closeModal(id){
+  const el=document.getElementById(id); if(!el) return;
+  if(!el.classList.contains('show')) return;
+  tgHideDom(id);
+  const i=TG_LAYERS.lastIndexOf(id); if(i>=0) TG_LAYERS.splice(i,1);
+  tgSync();
+}
 function toast(msg){
   const t=document.getElementById('toast');
   t.textContent=msg;
@@ -1101,7 +1157,7 @@ function renderBookStep(){
   const fresh = quote(); if(fresh) BOOK.q = fresh;
   const q = BOOK.q;
   const pane = document.getElementById('bkPane'); if(!pane) return;
-  const sheet = pane.closest('.sheet'); if(sheet) sheet.scrollTop = 0;
+  const sheet = pane.closest('.sheet-scroll') || pane.closest('.sheet'); if(sheet) sheet.scrollTop = 0;
   bookHeader();
 
   pane.innerHTML =
@@ -1724,6 +1780,8 @@ function init(){
   startNaverSync();
   initCloud();
   paintCloud();
+  /* 새로고침 뒤 남아 있을 수 있는 모달 히스토리 흔적을 현재 페이지 기록으로 정리 */
+  if(tgDepth()>0){ try{ history.replaceState({tg:0}, ''); }catch(e){} }
   document.addEventListener('keydown', e=>{
     if(e.key==='Escape'){ closeViewer(); document.querySelectorAll('.modal.show').forEach(m=>closeModal(m.id)); }
     if(document.getElementById('viewer').classList.contains('show')){
