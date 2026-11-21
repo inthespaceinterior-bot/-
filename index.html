@@ -199,7 +199,7 @@
           </tbody>
         </table>
         <p class="note">· 표시 요금은 1박 기준이며, 실제 판매 여부는 날짜마다 다릅니다(마감 다수).<br>
-        · 2027년 2월 7일 이후는 아직 판매가 열려 있지 않아 온라인 예약 대신 문의로 안내합니다.<br>
+        · 2027년 1월 31일까지만 예약이 열려 있고, 2월 이후는 아직 판매가 열리지 않아 온라인 예약 대신 문의로 안내합니다.<br>
         · 요금은 호스트 사정에 따라 변경될 수 있으며, 결제 직전 견적 화면의 금액이 최종 금액입니다.<br>
         · 외국인 게스트 참고 환율: US$1 ≈ 1,346원 · NT$1 ≈ 40.45원 (2026-11-20 기준)</p>
         <div class="rulebox" style="margin-top:22px">
@@ -241,7 +241,7 @@
   <div class="wrap">
     <div class="eyebrow">Reservation</div>
     <h2 style="font-size:32px;margin:10px 0 8px">날짜를 고르면 요금이 바로 계산됩니다</h2>
-    <p style="color:var(--muted);font-size:13.5px;margin:0 0 20px">요금·마감 상태는 네이버 예약 달력에서 2026-11-21 기준으로 확인한 실제 값입니다.</p>
+    <p id="naverStamp" data-dyn style="color:var(--muted);font-size:13.5px;margin:0 0 20px">네이버 예약 달력과 동기화 중…</p>
     <div class="quickpick">
       <div class="qp-head">
         <b>예약 가능한 날짜 바로 선택</b>
@@ -406,11 +406,8 @@
 <div class="modal" id="bookModal">
   <div class="veil" onclick="closeBooking()"></div>
   <div class="sheet">
-    <div class="sheet-head"><h3>예약 진행</h3><button class="x" onclick="closeBooking()">✕</button></div>
-    <div class="steps two-step">
-      <div class="on" id="st1">01 예약 정보</div>
-      <div id="st2">02 결제·완료</div>
-    </div>
+    <div class="sheet-head"><h3 id="bkTitle">예약 · 결제 한 화면</h3><button class="x" onclick="closeBooking()">✕</button></div>
+    <div class="onestep"><b id="osTitle">원스크린 예약</b><span id="osSub">정보 입력 → 결제 수단 → 확정. 화면을 넘기지 않습니다.</span></div>
     <div class="pane" id="bkPane" data-dyn></div>
   </div>
 </div>
