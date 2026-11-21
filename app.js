@@ -141,7 +141,7 @@ DICT.zh = {
 '1박 요금':'每晚起','500,000원~':'₩500,000 起','네이버 예약 실시간 요금 기준':'依 Naver 預訂即時房價',
 '광안리에서 가장 특별한 60평':'廣安里最特別的 60 坪',
 '광안리 해변 도보 1분':'步行 1 分鐘到廣安里海水浴場',
-'창을 열면 광안대교와 바다. 밀락더마켓 도보 5분, 민락수변공원 도보 10분.':'打開窗就是廣安大橋與海。밀락더마켓（Millac the Market）步行 5 分鐘、民樂水邊公園步行 10 分鐘。',
+'창을 열면 광안대교와 바다. 밀락더마켓 도보 5분, 민락수변공원 도보 10분.':'打開窗就是廣安大橋與海。Millac the Market 步行 5 分鐘、民樂水邊公園步行 10 分鐘。',
 '실내 온수풀 · 자쿠지':'室內溫水泳池 · 按摩浴缸',
 '사계절 24시간 이용 가능한 사설 실내 온수풀. 자쿠지 온수는 무료입니다.':'全年 24 小時可用的私人室內溫水泳池，按摩浴缸熱水免費。',
 '키즈룸 무료 오픈':'兒童房免費開放',
@@ -231,6 +231,38 @@ DICT.zh = {
 'iCal 동기화':'iCal 同步','예약 관리':'預訂管理','요금·계좌':'房價與帳戶','연동 가이드':'串接指南'
 };
 
+/* ── 2026-11-21 UX 개선: 원터치 날짜 칩 · 하단 예약 바 · 간단 예약 모달 ── */
+Object.assign(DICT.en, {
+'예약 가능한 날짜 바로 선택':'Pick an open night',
+'한 번만 누르면 체크인·체크아웃과 요금이 세팅됩니다':'One tap sets your check-in, check-out and price.',
+'마감·차단된 날짜는 자동으로 빠집니다 · 실제 예약 가능 여부는 서버와 실시간으로 맞춰집니다':'Closed and blocked dates are dropped automatically — availability stays in sync with the server.',
+'02 결제·완료':'02 Payment',
+'176개':'176 reviews',
+'사진 출처: 더광안 에어비앤비 공식 리스팅(숙소 819331064728703944) — 호스트가 직접 촬영·등록한 실제 숙소 사진이며, 공간 구분은 리스팅의 사진 투어 분류를 따랐습니다.':'Photo source: the official Airbnb listing of THE GWANGAN (room 819331064728703944) — real photos taken and uploaded by the host; the room grouping follows the listing\u2019s photo tour.',
+'네이버 예약·에어비앤비 모두 취소 규정을 예약 단계에서만 노출하고 있어 이 페이지에는 게시되어 있지 않습니다. 취소·환불은 예약 채널의 규정이 우선하며, 문의는 네이버 톡톡 또는 010-2650-0013으로 부탁드립니다.':'Naver Booking and Airbnb both show their cancellation terms only inside the booking flow, so they are not posted here. The rules of the channel you booked through govern any cancellation; for help, message us on Naver TalkTalk or call 010-2650-0013.',
+'예약자 성함':'Your name','연락처':'Phone','예약자 이름':'Guest name',
+'거실 · 침실 1~3 · 욕실 1~2 · 온수풀 · 키즈룸 · 주방까지 공간별로 골라 보세요.':'Living room · bedrooms 1–3 · bathrooms 1–2 · heated pool · kids’ room · kitchen — browse by space.',
+'· 외국인 게스트 참고 환율: US$1 ≈ 1,346원 · NT$1 ≈ 40.45원 (2026-11-20 기준)':'· Reference rates for international guests: US$1 ≈ ₩1,346 · NT$1 ≈ ₩40.45 (as of 20 Nov 2026)',
+'에어비앤비 후기 176개 전체 보기 ↗':'See all 176 Airbnb reviews ↗',
+'구글 지도에서 크게 보기 ↗':'Open in Google Maps ↗',
+'길찾기 ↗':'Directions ↗'
+});
+Object.assign(DICT.zh, {
+'예약 가능한 날짜 바로 선택':'直接選擇可預訂日期',
+'한 번만 누르면 체크인·체크아웃과 요금이 세팅됩니다':'按一下即設定入住、退房與房價。',
+'마감·차단된 날짜는 자동으로 빠집니다 · 실제 예약 가능 여부는 서버와 실시간으로 맞춰집니다':'已滿與關閉的日期會自動排除，可預訂狀態與伺服器即時同步。',
+'02 결제·완료':'02 付款',
+'176개':'176 則',
+'사진 출처: 더광안 에어비앤비 공식 리스팅(숙소 819331064728703944) — 호스트가 직접 촬영·등록한 실제 숙소 사진이며, 공간 구분은 리스팅의 사진 투어 분류를 따랐습니다.':'照片來源：THE GWANGAN 官方 Airbnb 房源（房源編號 819331064728703944）——由房東親自拍攝並上傳的實際照片，空間分類依房源照片導覽。',
+'네이버 예약·에어비앤비 모두 취소 규정을 예약 단계에서만 노출하고 있어 이 페이지에는 게시되어 있지 않습니다. 취소·환불은 예약 채널의 규정이 우선하며, 문의는 네이버 톡톡 또는 010-2650-0013으로 부탁드립니다.':'Naver 預訂與 Airbnb 皆只在預訂流程中顯示取消規定，因此未刊登於此頁。取消與退款以您預訂的管道規定為準，洽詢請用 Naver TalkTalk 或 010-2650-0013。',
+'예약자 성함':'預訂人姓名','연락처':'聯絡電話','예약자 이름':'預訂人姓名',
+'거실 · 침실 1~3 · 욕실 1~2 · 온수풀 · 키즈룸 · 주방까지 공간별로 골라 보세요.':'客廳 · 臥室 1~3 · 衛浴 1~2 · 溫水泳池 · 兒童房 · 廚房，依空間瀏覽。',
+'· 외국인 게스트 참고 환율: US$1 ≈ 1,346원 · NT$1 ≈ 40.45원 (2026-11-20 기준)':'· 海外旅客參考匯率：US$1 ≈ ₩1,346 · NT$1 ≈ ₩40.45（2026-11-20 基準）',
+'에어비앤비 후기 176개 전체 보기 ↗':'查看全部 176 則 Airbnb 評價 ↗',
+'구글 지도에서 크게 보기 ↗':'在 Google 地圖開啟 ↗',
+'길찾기 ↗':'路線指引 ↗'
+});
+
 const ORIG = new WeakMap();
 function applyStatic(){
   const w=document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
@@ -260,12 +292,16 @@ function applyStatic(){
     : LANG==='zh' ? 'THE GWANGAN · 釜山廣安里海景泳池別墅'
     : 'THE GWANGAN · 더광안 | 광안리 오션뷰 풀빌라 예약';
   document.querySelectorAll('.lang-sw button').forEach(b=>b.classList.toggle('on', b.dataset.lang===LANG));
+  document.querySelectorAll('.cal-nav button').forEach((b,i)=>{
+    b.setAttribute('aria-label', i===0?L('이전 달','Previous month','上個月'):L('다음 달','Next month','下個月'));
+  });
 }
 function setLang(l){
   LANG=l; try{ localStorage.setItem('tg_lang',l); }catch(e){}
   applyStatic();
   if(typeof renderCals==='function'){ renderCals(); renderQuote(); syncSearch(); renderGallery(); }
   if(typeof renderReviews==='function') renderReviews();
+  if(typeof paintCloud==='function') paintCloud();
   document.querySelectorAll('.modal.show').forEach(m=>closeModal(m.id));
 }
 
@@ -601,15 +637,18 @@ function monthHTML(y,m){
   for(let i=0;i<start;i++) h+='<span></span>';
   for(let d=1;d<=last;d++){
     const dsr = y+'-'+pad(m+1)+'-'+pad(d), st = stateOf(dsr);
+    const asOut = !!(ST.in && !ST.out && dsr > ST.in && st !== 'past');
     const cls = ['d','open'];
     if(st!=='open') cls[1]='off';
+    if(asOut && st!=='open') cls.push('asout');
     if(dsr===ST.in || dsr===ST.out) cls.push(dsr===ST.in?'start':'end');
     else if(ST.in && ST.out && dsr>ST.in && dsr<ST.out) cls.push('inrange');
     if(dsr===TODAY) cls.push('today');
     const p = priceOf(dsr);
-    const priceTxt = (st==='open'||st==='reserved') ? (p/10000)+'만' : '';
-    const dis = (st==='open') ? '' : ' disabled';
-    h += '<button class="'+cls.join(' ')+'"'+dis+' onclick="pickDate(\''+dsr+'\')" title="'+pretty(dsr)+' · '+stateLabel(st)+(st==='open'?' · '+won(p):'')+'">'
+    const priceTxt = (st==='open'||st==='reserved') ? calPriceShort(p) : '';
+    const dis = (st==='open' || asOut) ? '' : ' disabled';
+    const titleTxt = pretty(dsr)+' · '+(asOut && st!=='open' ? L('체크아웃일로 선택 가능','Can be your check-out day','可選為退房日') : stateLabel(st))+(st==='open'?' · '+won(p):'');
+    h += '<button class="'+cls.join(' ')+'"'+dis+' onclick="pickDate(\''+dsr+'\')" title="'+titleTxt+'">'
        + '<span class="n">'+d+'</span>'+(priceTxt?'<span class="p">'+priceTxt+'</span>':'')+'</button>';
   }
   h += '</div>';
@@ -623,10 +662,15 @@ function shiftMonth(d){
 }
 function pickDate(dsr){
   const st = stateOf(dsr);
-  if(st!=='open') return;
-  if(!ST.in || (ST.in && ST.out)){ ST.in = dsr; ST.out = null; }
-  else if(dsr > ST.in){ ST.out = dsr; }
-  else { ST.in = dsr; ST.out = null; }
+  if(!ST.in || (ST.in && ST.out)){
+    if(st!=='open') return;
+    ST.in = dsr; ST.out = null;
+  } else if(dsr > ST.in){
+    ST.out = dsr;            // 마감·판매중지일도 체크아웃일로는 선택 가능
+  } else {
+    if(st!=='open') return;
+    ST.in = dsr; ST.out = null;
+  }
   renderCals(); renderQuote(); syncSearch();
 }
 
@@ -649,7 +693,7 @@ function renderQuote(){
   const btn = document.getElementById('qBtn');
   document.getElementById('selIn').textContent = ST.in? pretty(ST.in) : '—';
   document.getElementById('selOut').textContent = ST.out? pretty(ST.out) : '—';
-  document.getElementById('selNights').textContent = q? q.n+'박' : '—';
+  document.getElementById('selNights').textContent = q? nightsLabel(q.n) : '—';
 
   const fxEl = document.getElementById('qFx');
   if(!q){
@@ -658,6 +702,7 @@ function renderQuote(){
       + (ST.in? pretty(ST.in)+L(' 체크인 — 체크아웃 날짜를 선택해 주세요.',' check-in — now choose your check-out date.',' 入住——請選擇退房日期。') : L('달력에서 체크인·체크아웃 날짜를 선택해 주세요.','Choose your check-in and check-out dates on the calendar.','請在日曆上選擇入住與退房日期。'))
       + '</p><div class="qline"><span>'+L('1박 요금','Nightly rate','每晚房價')+'</span><b>—</b></div>';
     total.textContent='—'; if(fxEl) fxEl.textContent=''; btn.disabled = true;
+    renderQuickPicks(); renderBar();
     return;
   }
   let rows = '';
@@ -686,6 +731,7 @@ function renderQuote(){
   }else{
     btn.disabled = false; btn.textContent=L('예약하기','Book now','立即預訂')+' · '+won(q.total);
   }
+  renderQuickPicks(); renderBar();
 }
 function toggleKids(){ ST.kidsroom = !ST.kidsroom; renderQuote(); }
 function toggleCoupon(){ ST.coupon = !ST.coupon; renderQuote(); }
@@ -725,20 +771,109 @@ function sbChanged(){
 }
 function goBook(){
   if(!ST.in){
-    // 첫 예약 가능일 자동 추천 (다음 날도 열려 있으면 1박으로 함께 선택)
-    const first = Object.keys(NAVER).filter(d=>stateOf(d)==='open')[0];
-    if(first){
-      ST.in = first;
-      ST.out = stateOf(addDays(first,1))==='open' ? addDays(first,1) : null;
-    }
+    // 첫 예약 가능일 자동 추천 (다음 날도 마감이면 1박만)
+    pickEarliest();
   }
   document.getElementById('booking').scrollIntoView({behavior:'smooth'});
   renderCals(); renderQuote(); syncSearch();
-  toast(L('예약 가능한 날짜를 달력에서 선택하세요','Choose an available date on the calendar','請在日曆上選擇可預訂的日期'));
 }
 function nextOpenAfter(d){
   for(let i=1;i<40;i++){ const x=addDays(d,i); if(stateOf(x)==='open') return x; }
   return null;
+}
+
+/* ── 원터치 날짜 칩 + 하단 고정 예약 바 ── */
+function wonShort(n){
+  if(n==null) return '—';
+  if(LANG==='ko') return Math.round(n/10000)+'만원';
+  if(LANG==='zh') return '₩'+Math.round(n/10000)+'萬';
+  return n>=1000000 ? '₩'+(Math.round(n/100000)/10)+'m' : '₩'+Math.round(n/1000)+'k';
+}
+function calPriceShort(n){
+  if(n==null) return '';
+  if(LANG==='ko') return (n/10000)+'만';
+  if(LANG==='zh') return Math.round(n/10000)+'萬';
+  return Math.round(n/1000)+'k';
+}
+function prettyChip(s){
+  const d=parseDS(s), w=d.getDay();
+  if(LANG==='en') return MON_EN[d.getMonth()]+' '+d.getDate()+' ('+DOW_EN[w]+')';
+  if(LANG==='zh') return (d.getMonth()+1)+'/'+d.getDate()+'（'+DOW_ZH[w]+'）';
+  return (d.getMonth()+1)+'/'+d.getDate()+'('+DOW[w]+')';
+}
+/* 실제 판매중(마감·차단 제외)인 다가오는 날짜만 1박 옵션으로 뽑는다 */
+function quickPickOptions(max){
+  const out=[], lim=max||6;
+  for(let i=0;i<170 && out.length<lim;i++){
+    const d=addDays(TODAY,i);
+    if(stateOf(d)!=='open') continue;
+    out.push({in:d, out:addDays(d,1), price:priceOf(d)});
+  }
+  return out;
+}
+function pickEarliest(){
+  const o=quickPickOptions(1);
+  if(!o.length) return false;
+  ST.in=o[0].in; ST.out=o[0].out;
+  return true;
+}
+function pickQuick(ds){
+  ST.in=ds; ST.out=addDays(ds,1);
+  renderCals(); renderQuote(); syncSearch();
+}
+function renderQuickPicks(){
+  const box=document.getElementById('qpChips'); if(!box) return;
+  const opts=quickPickOptions(6);
+  if(!opts.length){
+    box.innerHTML='<span class="qp-none">'+L('지금 바로 예약 가능한 날짜가 없습니다. 010-2650-0013으로 문의해 주세요.','No dates are open right now — please call 010-2650-0013.','目前沒有可預訂的日期，請電 010-2650-0013。')+'</span>';
+    return;
+  }
+  box.innerHTML = opts.map(o=>{
+    const on = (ST.in===o.in && ST.out===o.out);
+    return '<button class="qp-chip'+(on?' on':'')+'" onclick="pickQuick(\''+o.in+'\')"'
+      + ' aria-label="'+prettyFull(o.in)+' · '+L('1박 ','1 night ','1 晚 ')+won(o.price)+'">'
+      + '<span class="qp-d">'+prettyChip(o.in)+'</span>'
+      + '<span class="qp-p">'+wonShort(o.price)+'<em>· '+L('1박','1 night','1 晚')+'</em></span>'
+      + '</button>';
+  }).join('');
+}
+function lowestOpenPrice(){
+  const o=quickPickOptions(1);
+  if(o.length) return o[0].price;
+  let m=null;
+  Object.keys(NAVER).forEach(k=>{ const v=NAVER[k]; if(v[0] && (m==null || v[0]<m)) m=v[0]; });
+  return m||500000;
+}
+function renderBar(){
+  const priceEl=document.getElementById('bbPrice'); if(!priceEl) return;
+  const per=document.getElementById('bbPer'), sub=document.getElementById('bbSub'), btn=document.getElementById('bbBtn');
+  const q=quote();
+  if(q){
+    priceEl.textContent=won(q.total);
+    per.textContent=L('총 결제액','total','總額');
+    sub.textContent=pretty(ST.in)+' → '+pretty(ST.out)+' · '+nightsLabel(q.n);
+    btn.textContent=L('예약하기','Book now','立即預訂');
+  }else{
+    const o=quickPickOptions(1);
+    priceEl.textContent=won(lowestOpenPrice())+L('~','~','起');
+    per.textContent=L('/ 1박','/ night','/ 晚');
+    sub.textContent = ST.in
+      ? pretty(ST.in)+L(' 체크인 · 체크아웃 날짜를 고르세요',' check-in · choose your check-out',' 入住 · 請選退房日')
+      : (o.length ? L('가장 빠른 체크인 ','Next check-in ','最快可入住 ')+pretty(o[0].in)
+                  : L('예약 가능한 날짜 문의','Please ask about dates','請洽詢可預訂日期'));
+    btn.textContent=L('바로 예약하기','Book now','立即預訂');
+  }
+}
+function barBooking(){
+  if(!quote()){
+    if(!pickEarliest()){
+      document.getElementById('booking').scrollIntoView({behavior:'smooth'});
+      toast(L('지금 바로 예약 가능한 날짜가 없습니다. 010-2650-0013으로 문의해 주세요.','No dates are open right now — please call 010-2650-0013.','目前沒有可預訂的日期，請電 010-2650-0013。'));
+      return;
+    }
+    renderCals(); renderQuote(); syncSearch();
+  }
+  startBooking();
 }
 
 /* ── gallery ── */
@@ -824,8 +959,11 @@ function closeViewer(){ document.getElementById('viewer').classList.remove('show
 function openModal(id){ document.getElementById(id).classList.add('show'); document.body.style.overflow='hidden'; }
 function closeModal(id){ document.getElementById(id).classList.remove('show'); if(!document.querySelector('.modal.show')) document.body.style.overflow=''; }
 function toast(msg){
-  const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show');
-  clearTimeout(window.__tt); window.__tt=setTimeout(()=>t.classList.remove('show'),2600);
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.classList.toggle('over-modal', !!document.querySelector('.modal.show'));
+  t.classList.add('show');
+  clearTimeout(window.__tt); window.__tt=setTimeout(()=>{ t.classList.remove('show'); setTimeout(()=>{ if(!t.classList.contains('show')) t.textContent=''; },260); },2200);
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -833,85 +971,117 @@ function toast(msg){
    ═══════════════════════════════════════════════════════════ */
 let BOOK = null;
 function startBooking(){
+  if(!ST.in) pickEarliest();
+  if(ST.in && !ST.out && stateOf(ST.in)==='open') ST.out = addDays(ST.in,1);
   const q = quote();
-  if(!q || q.blockedIn){ toast('날짜를 다시 선택해 주세요'); return; }
-  BOOK = {q, method:null, card:{company:'', installment:'일시불'}, depositor:'', payer:{name:'',phone:'',email:'',memo:''}};
+  if(!q){ toast(L('체크아웃 날짜를 선택해 주세요','Please choose a check-out date','請選擇退房日期')); return; }
+  if(q.blockedIn){ toast(L('선택한 기간에 예약할 수 없는 날짜가 있습니다. 다른 날짜를 선택해 주세요.','Your stay includes an unavailable date — please pick another.','所選期間包含無法預訂的日期，請重新選擇。')); return; }
+  BOOK = {q, method:'bank', card:{company:'', installment:'일시불'}, depositor:'', payer:{name:'',phone:'',email:'',memo:''}};
   renderBookStep(1);
   openModal('bookModal');
 }
 function setStep(n){
-  [1,2,3].forEach(i=>document.getElementById('st'+i).classList.toggle('on', i===n));
+  [1,2].forEach(i=>{ const el=document.getElementById('st'+i); if(el) el.classList.toggle('on', i===n); });
 }
-function renderBookStep(step){
-  setStep(step);
-  const pane=document.getElementById('bkPane');
-  const q=BOOK.q;
-  const summary = '<div class="sum">'
+
+/* ── 예약 모달: 입력값을 잃지 않고 다시 그리기 ── */
+function captureBookInputs(){
+  if(!BOOK) return;
+  const g = id => document.getElementById(id);
+  const n=g('bName'), p=g('bPhone'), e=g('bEmail'), m=g('bMemo'), dep=g('depositor');
+  if(n) BOOK.payer.name=n.value;
+  if(p) BOOK.payer.phone=p.value;
+  if(e) BOOK.payer.email=e.value;
+  if(m) BOOK.payer.memo=m.value;
+  if(dep) BOOK.depositor=dep.value;
+}
+function guestRowModal(k, label, sub){
+  return '<div class="guests-row"><div class="lab">'+label+' <small>'+sub+'</small></div>'
+    + '<div class="stepper"><button type="button" onclick="stepGuestModal(\''+k+'\',-1)" aria-label="−">−</button>'
+    + '<b id="mg_'+k+'">'+ST[k]+'</b>'
+    + '<button type="button" onclick="stepGuestModal(\''+k+'\',1)" aria-label="+">+</button></div></div>';
+}
+function stepGuestModal(k,d){
+  captureBookInputs();
+  stepGuest(k,d);
+  if(BOOK) BOOK.q = quote() || BOOK.q;
+  renderBookStep(1);
+}
+function toggleKidsModal(){
+  captureBookInputs();
+  toggleKids();
+  if(BOOK) BOOK.q = quote() || BOOK.q;
+  renderBookStep(1);
+}
+function bookSummary(q){
+  return '<div class="sum">'
     + '<div class="row"><span>'+L('체크인','Check-in','入住')+'</span><b>'+prettyFull(ST.in)+' 15:00</b></div>'
     + '<div class="row"><span>'+L('체크아웃','Check-out','退房')+'</span><b>'+prettyFull(ST.out)+' 11:00</b></div>'
     + '<div class="row"><span>'+L('인원','Guests','人數')+'</span><b>'+L('성인 ','Adults ','成人 ')+ST.adults+' · '+L('아동 ','Children ','兒童 ')+ST.children+' · '+L('유아 ','Infants ','嬰兒 ')+ST.infants+'</b></div>'
     + '<div class="row"><span>'+L('숙박','Stay','住宿')+'</span><b>'+nightsLabel(q.n)+' · '+L('숙소 요금 ','Room total ','住宿小計 ')+won(q.sum)+'</b></div>'
     + (q.longStay?'<div class="row" style="color:var(--ok)"><span>'+L('연박 할인','Long-stay discount','連住優惠')+'</span><b>−'+won(q.longStay)+'</b></div>':'')
-    + (q.extra?'<div class="row"><span>'+L('인원 추가','Extra guests','加人')+'</span><b>'+won(q.extra)+'</b></div>':'')
+    + (q.extra?'<div class="row"><span>'+L('인원 추가 (기준 8인 초과)','Extra guests (over 8)','加人（超出 8 人）')+'</span><b>'+won(q.extra)+'</b></div>':'')
     + (q.kids?'<div class="row"><span>'+L('키즈룸','Kids’ room','兒童房')+'</span><b>'+won(q.kids)+'</b></div>':'')
-    + (q.coupon?'<div class="row" style="color:var(--ok)"><span>'+L('쿠폰','Coupon','優惠券')+'</span><b>−'+won(q.coupon)+'</b></div>':'')
-    + '<div class="big"><span style="font-size:12px;letter-spacing:.14em;color:var(--muted)">'+L('총 결제 금액','Total','應付總額')+'</span><b>'+won(q.total)+'</b></div>'
-    + '<div style="font-size:11.5px;color:var(--muted);text-align:right;margin-top:4px">'+fxText(q.total)+'</div>'
+    + (q.coupon?'<div class="row" style="color:var(--ok)"><span>'+L('키즈룸 무료 쿠폰','Kids’ room free coupon','兒童房免費券')+'</span><b>−'+won(q.coupon)+'</b></div>':'')
     + '</div>';
+}
+function renderBookStep(step){
+  setStep(step);
+  const pane=document.getElementById('bkPane');
+  const sheet=pane.closest('.sheet'); if(sheet) sheet.scrollTop=0;
+  if(!BOOK) return;
+  const q=BOOK.q;
+  const totalBar = '<div class="bk-total"><span>'+L('총 결제 금액','Total','應付總額')+'</span><b>'+won(q.total)+'</b></div>';
 
   if(step===1){
-    pane.innerHTML = summary
-      + '<div class="two"><div class="field"><label>'+L('예약자 이름','Guest name','預訂人姓名')+'</label><input id="bName" value="'+esc(BOOK.payer.name)+'" placeholder="'+L('홍길동','Full name','姓名')+'"></div>'
-      + '<div class="field"><label>'+L('휴대폰','Mobile','手機')+'</label><input id="bPhone" value="'+esc(BOOK.payer.phone)+'" placeholder="010-0000-0000"></div></div>'
-      + '<div class="field"><label>'+L('이메일','Email','電子郵件')+'</label><input id="bEmail" value="'+esc(BOOK.payer.email)+'" placeholder="you@example.com"></div>'
-      + '<div class="field"><label>'+L('요청 사항 (선택)','Requests (optional)','其他需求（選填）')+'</label><textarea id="bMemo" rows="3" placeholder="'+L('주차 필요 여부, 키즈룸 준비, 얼리 체크인 등','Parking, kids’ room set-up, early check-in…','停車需求、兒童房準備、提早入住等')+'">'+esc(BOOK.payer.memo)+'</textarea></div>'
-      + '<div class="demo-note">'+L('이 페이지는 시연용 예약 앱입니다. 실제 숙소 예약·결제는 네이버 예약 또는 에어비앤비에서 진행됩니다. 여기서 확정한 예약은 브라우저(localStorage)에만 저장되어 이 기기의 달력이 마감됩니다.','This page is a demonstration booking app. Real bookings are made on Naver Booking or Airbnb. A booking confirmed here is stored only in this browser (localStorage) and closes those dates on this device.','本頁面為預訂示範網站，實際預訂請透過 Naver 預訂或 Airbnb。在此確認的預訂僅儲存在本瀏覽器（localStorage），並僅在此裝置關閉該日期。')+'</div>'
-      + '<button class="btn gold wide" onclick="savePayer()">'+L('결제 수단 선택으로','Continue to payment','前往付款方式')+'</button>';
+    pane.innerHTML = bookSummary(q)
+      + '<div class="book-guest">'
+      +   guestRowModal('adults', L('성인','Adults','成人'), L('만 13세 이상','13 and over','13 歲以上'))
+      +   guestRowModal('children', L('아동','Children','兒童'), L('만 2~12세 · 기준 인원 포함','Age 2–12 · counted in base','2~12 歲 · 計入基本人數'))
+      +   guestRowModal('infants', L('유아','Infants','嬰兒'), L('24개월 미만 · 무료','Under 24 months · free','未滿 24 個月 · 免費'))
+      + '</div>'
+      + '<div class="two"><div class="field"><label>'+L('예약자 성함','Your name','預訂人姓名')+' *</label><input id="bName" value="'+esc(BOOK.payer.name)+'" placeholder="'+L('홍길동','Full name','姓名')+'"></div>'
+      + '<div class="field"><label>'+L('연락처','Phone','聯絡電話')+' *</label><input id="bPhone" type="tel" inputmode="tel" value="'+esc(BOOK.payer.phone)+'" placeholder="'+L('010-0000-0000','+82 10 0000 0000','+82 10-0000-0000')+'"></div></div>'
+      + '<div class="book-opt"><label><input type="checkbox" id="bkKids" '+(ST.kidsroom?'checked':'')+' onchange="toggleKidsModal()"><span>'+L('키즈룸 이용 — 무료 쿠폰 자동 적용','Kids’ room — free coupon applied','使用兒童房 — 自動套用免費券')+'</span></label><span class="amt">'+L('무료','Free','免費')+'</span></div>'
+      + '<details class="book-more"><summary>'+L('이메일 · 요청 사항 (선택)','Email & requests (optional)','電子郵件與需求（選填）')+'</summary>'
+      +   '<div class="field"><label>'+L('이메일','Email','電子郵件')+'</label><input id="bEmail" type="email" value="'+esc(BOOK.payer.email)+'" placeholder="you@example.com"></div>'
+      +   '<div class="field"><label>'+L('요청 사항','Requests','其他需求')+'</label><textarea id="bMemo" rows="2" placeholder="'+L('주차, 키즈룸 준비, 얼리 체크인 등','Parking, kids’ room set-up, early check-in…','停車、兒童房準備、提早入住等')+'">'+esc(BOOK.payer.memo)+'</textarea></div>'
+      + '</details>'
+      + '<button class="btn gold wide" onclick="savePayer()">'+L('결제 수단 선택','Continue to payment','前往付款方式')+' · '+won(q.total)+'</button>'
+      + '<p class="qnote" style="text-align:center">'+L('성함과 연락처만 있으면 예약됩니다.','A name and a phone number are all we need.','只需姓名與電話即可預訂。')+'</p>';
+    return;
   }
-  if(step===2){
-    pane.innerHTML = summary
-      + '<div class="pay-opt" id="poCard" onclick="pickMethod(\'card\')">'
-      +   '<div class="top"><b>'+L('신용·체크카드 (국내)','Credit / debit card (Korea)','信用卡／簽帳卡（韓國）')+'</b><span>'+L('즉시 확정','Instant','立即確認')+'</span></div>'
-      +   '<p>'+L('국내 모든 카드사 · 할부 선택 가능','All Korean card issuers · instalments available','韓國各發卡銀行 · 可選分期')+'</p>'
-      +   '<div class="pay-body" onclick="event.stopPropagation()">'
-      +     '<div class="two"><div class="field"><label>'+L('카드사','Card issuer','發卡銀行')+'</label><select id="cardCompany">'+CARD_COMPANIES.map(c=>'<option>'+c+'</option>').join('')+'</select></div>'
-      +     '<div class="field"><label>'+L('할부','Instalments','分期')+'</label><select id="cardInstallment">'+INSTALLMENTS.map(c=>'<option>'+instLabel(c)+'</option>').join('')+'</select></div></div>'
-      +     '<label style="font-size:12px;color:#46525E;display:flex;gap:8px;align-items:flex-start;margin:6px 0 12px"><input type="checkbox" id="cardAgree" style="margin-top:3px"> '+L('결제 정보 확인 및 개인정보 제공에 동의합니다.','I agree to the payment details and privacy terms.','我同意付款資訊與個人資料使用條款。')+'</label>'
-      +     '<button class="btn gold wide" onclick="payCard()">'+won(q.total)+L(' 카드 결제',' card payment',' 信用卡付款')+'</button>'
-      +   '</div>'
-      + '</div>'
-      + '<div class="pay-opt" id="poIntl" onclick="pickMethod(\'intl\')">'
-      +   '<div class="top"><b>'+L('해외카드 (Visa · Mastercard · JCB)','International card (Visa · Mastercard · JCB)','海外信用卡（Visa · Mastercard · JCB）')+'</b><span>'+L('USD 청구','Billed in USD','以美元計價')+'</span></div>'
-      +   '<p>'+L('해외 발급 카드로 결제합니다. 카드사 환율·수수료가 붙을 수 있습니다.','Pay with a card issued outside Korea. Card-issuer FX rates and fees may apply.','以外國發行的卡片付款，可能產生發卡行匯率與手續費。')+'</p>'
-      +   '<div class="pay-body" onclick="event.stopPropagation()">'
-      +     '<div class="two"><div class="field"><label>'+L('카드 브랜드','Card brand','卡片品牌')+'</label><select id="intlBrand"><option>Visa</option><option>Mastercard</option><option>JCB</option><option>American Express</option></select></div>'
-      +     '<div class="field"><label>'+L('할부','Instalments','分期')+'</label><select id="intlInstallment">'+INSTALLMENTS.map(c=>'<option>'+instLabel(c)+'</option>').join('')+'</select></div></div>'
-      +     '<div class="acct" style="border-color:var(--sand);background:#fff">'+L('결제 금액','Amount','付款金額')+': <b>'+won(q.total)+'</b><div style="font-size:11.5px;color:var(--muted);margin-top:4px">'+fxText(q.total)+'</div></div>'
-      +     '<label style="font-size:12px;color:#46525E;display:flex;gap:8px;align-items:flex-start;margin:6px 0 12px"><input type="checkbox" id="intlAgree" style="margin-top:3px"> '+L('해외카드 결제 및 3-D Secure 인증에 동의합니다.','I agree to international card payment and 3-D Secure verification.','我同意海外信用卡付款與 3-D Secure 驗證。')+'</label>'
-      +     '<button class="btn gold wide" onclick="payIntl()">'+L('해외카드로 결제','Pay with international card','以外國信用卡付款')+'</button>'
-      +   '</div>'
-      + '</div>'
-      + '<div class="pay-opt" id="poPaypal" onclick="pickMethod(\'paypal\')">'
-      +   '<div class="top"><b>PayPal</b><span>'+L('USD 청구','Billed in USD','以美元計價')+'</span></div>'
-      +   '<p>'+L('PayPal 계정으로 안전하게 결제합니다. 해외 게스트에게 가장 편한 방법입니다.','Pay securely with your PayPal account — easiest for guests outside Korea.','使用 PayPal 帳號安全付款，海外旅客最方便。')+'</p>'
-      +   '<div class="pay-body" onclick="event.stopPropagation()">'
-      +     '<div class="acct" style="border-color:#c9d6e6;background:#F7FAFF">PayPal '+L('결제 금액','amount','金額')+': <b>'+won(q.total)+'</b><div style="font-size:11.5px;color:var(--muted);margin-top:4px">'+fxText(q.total)+'</div></div>'
-      +     '<button class="btn gold wide" onclick="payPaypal()">'+L('PayPal로 결제','Continue with PayPal','使用 PayPal 付款')+'</button>'
-      +   '</div>'
-      + '</div>'
-      + '<div class="pay-opt" id="poBank" onclick="pickMethod(\'bank\')">'
-      +   '<div class="top"><b>'+L('계좌이체 (무통장 입금)','Bank transfer','銀行轉帳（無摺存款）')+'</b><span>'+L('입금 후 확정','Confirm after transfer','匯款後確認')+'</span></div>'
-      +   '<p>'+L('입금자명을 남기면 예약이 접수되고 날짜가 마감됩니다.','Leave the sender name and your dates are held.','填寫匯款人姓名後即受理，並關閉該日期。')+'</p>'
-      +   '<div class="pay-body" onclick="event.stopPropagation()">'
-      +     accountBlock()
-      +     '<div class="field"><label>'+L('입금자명','Sender name','匯款人姓名')+'</label><input id="depositor" value="'+esc(BOOK.depositor)+'" placeholder="'+L('입금하실 분 성함','Name on the transfer','匯款人姓名')+'"></div>'
-      +     '<div class="field"><label>'+L('입금 예정 금액','Amount to transfer','匯款金額')+'</label><input value="'+won(q.total)+'" disabled></div>'
-      +     '<button class="btn gold wide" onclick="confirmBank()">'+L('입금 예약 확정','Confirm transfer booking','確認轉帳預訂')+' · '+won(q.total)+'</button>'
-      +     '<p class="qnote" style="margin-top:8px">'+L('확정 시 선택하신 날짜가 즉시 마감됩니다. 실제 입금 확인은 호스트가 계좌에서 확인하며, 자동 확인은 입금 확인 서버(가상계좌·PG) 연동이 필요합니다.','Confirming holds those dates immediately. The host verifies the transfer in the account; automatic verification needs a deposit-check server (virtual account / PG).','確認後將立即關閉該日期。實際入帳由房東於帳戶確認；自動確認需串接匯款確認伺服器（虛擬帳號／PG）。')+'</p>'
-      +   '</div>'
-      + '</div>'
-      + '<button class="btn ghost wide" style="margin-top:8px" onclick="renderBookStep(1)">← '+L('이전','Back','上一步')+'</button>';
-  }
+
+  pane.innerHTML = totalBar
+    + '<div class="pay-opt'+(BOOK.method==='bank'?' on':'')+'" id="poBank" onclick="pickMethod(\'bank\')">'
+    +   '<div class="top"><b>'+L('계좌이체 · 카카오뱅크','Bank transfer · KakaoBank','銀行轉帳 · KakaoBank')+'</b><span>'+L('가장 간편','Easiest','最簡便')+'</span></div>'
+    +   '<p>'+L('계좌번호를 복사해 입금하면 예약이 접수됩니다.','Copy the account number and send the transfer.','複製帳號匯款後即受理預訂。')+'</p>'
+    +   '<div class="pay-body" onclick="event.stopPropagation()">'
+    +     accountBlock()
+    +     '<div class="field"><label>'+L('입금자명','Sender name','匯款人姓名')+'</label><input id="depositor" value="'+esc(BOOK.depositor||BOOK.payer.name)+'" placeholder="'+L('입금하실 분 성함','Name on the transfer','匯款人姓名')+'"></div>'
+    +     '<button class="btn gold wide" onclick="confirmBank()">'+L('입금 예약 확정','Confirm booking','確認預訂')+' · '+won(q.total)+'</button>'
+    +     '<p class="qnote" style="margin-top:8px">'+L('확정하면 선택하신 날짜가 바로 마감됩니다.','Confirming holds those dates immediately.','確認後將立即關閉該日期。')+'</p>'
+    +   '</div>'
+    + '</div>'
+    + '<div class="pay-opt'+(BOOK.method==='card'?' on':'')+'" id="poCard" onclick="pickMethod(\'card\')">'
+    +   '<div class="top"><b>'+L('신용·체크카드','Credit / debit card','信用卡／簽帳卡')+'</b><span>'+L('즉시 확정','Instant','立即確認')+'</span></div>'
+    +   '<p>'+L('국내 모든 카드사 · 할부 선택 가능','All Korean card issuers · instalments','韓國各發卡銀行 · 可選分期')+'</p>'
+    +   '<div class="pay-body" onclick="event.stopPropagation()">'
+    +     '<div class="two"><div class="field"><label>'+L('카드사','Card issuer','發卡銀行')+'</label><select id="cardCompany">'+CARD_COMPANIES.map(c=>'<option>'+c+'</option>').join('')+'</select></div>'
+    +     '<div class="field"><label>'+L('할부','Instalments','分期')+'</label><select id="cardInstallment">'+INSTALLMENTS.map(c=>'<option>'+instLabel(c)+'</option>').join('')+'</select></div></div>'
+    +     '<label style="font-size:12px;color:#46525E;display:flex;gap:8px;align-items:flex-start;margin:6px 0 12px"><input type="checkbox" id="cardAgree" style="margin-top:3px"> '+L('결제 정보 확인 및 개인정보 제공에 동의합니다.','I agree to the payment and privacy terms.','我同意付款資訊與個人資料條款。')+'</label>'
+    +     '<button class="btn gold wide" onclick="payCard()">'+won(q.total)+L(' 카드 결제',' card payment',' 信用卡付款')+'</button>'
+    +   '</div>'
+    + '</div>'
+    + '<details class="pay-alt"><summary>'+L('해외 카드 · PayPal로 결제','Pay with an international card or PayPal','以外國信用卡或 PayPal 付款')+'</summary><div class="inner">'
+    +   '<div class="two"><div class="field"><label>'+L('카드 브랜드','Card brand','卡片品牌')+'</label><select id="intlBrand"><option>Visa</option><option>Mastercard</option><option>JCB</option><option>American Express</option></select></div>'
+    +   '<div class="field"><label>'+L('할부','Instalments','分期')+'</label><select id="intlInstallment">'+INSTALLMENTS.map(c=>'<option>'+instLabel(c)+'</option>').join('')+'</select></div></div>'
+    +   '<div class="acct" style="border-color:var(--sand);background:#fff">'+L('결제 금액','Amount','付款金額')+': <b>'+won(q.total)+'</b><div style="font-size:11.5px;color:var(--muted);margin-top:4px">'+fxText(q.total)+'</div></div>'
+    +   '<label style="font-size:12px;color:#46525E;display:flex;gap:8px;align-items:flex-start;margin:6px 0 12px"><input type="checkbox" id="intlAgree" style="margin-top:3px"> '+L('해외카드 결제 및 3-D Secure 인증에 동의합니다.','I agree to international card payment and 3-D Secure.','我同意海外信用卡付款與 3-D Secure 驗證。')+'</label>'
+    +   '<button class="btn gold wide" onclick="payIntl()">'+L('해외카드로 결제','Pay with international card','以外國信用卡付款')+'</button>'
+    +   '<button class="btn ghost wide" style="margin-top:8px" onclick="payPaypal()">PayPal</button>'
+    + '</div></details>'
+    + '<button class="btn ghost wide" style="margin-top:12px" onclick="renderBookStep(1)">← '+L('이전','Back','上一步')+'</button>';
 }
 const CARD_COMPANIES = ['KB국민카드','신한카드','삼성카드','현대카드','롯데카드','하나카드','우리카드','NH농협카드','BC카드','카카오뱅크','케이뱅크','토스뱅크'];
 const INSTALLMENTS = ['일시불','2개월','3개월','4개월','5개월','6개월','12개월','24개월'];
@@ -963,9 +1133,13 @@ function demoPG(company, installment, usd, brand){
 }
 function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 function savePayer(){
-  const n=document.getElementById('bName').value.trim(), p=document.getElementById('bPhone').value.trim(), e=document.getElementById('bEmail').value.trim();
-  if(!n||!p){ toast('이름과 휴대폰 번호를 입력해 주세요'); return; }
-  BOOK.payer={name:n,phone:p,email:e,memo:document.getElementById('bMemo').value.trim()};
+  const n=document.getElementById('bName').value.trim(), p=document.getElementById('bPhone').value.trim();
+  if(!n){ toast(L('예약자 성함을 입력해 주세요','Please enter your name','請輸入預訂人姓名')); return; }
+  if(p.replace(/[^0-9]/g,'').length<8){ toast(L('연락처를 정확히 입력해 주세요','Please enter a valid phone number','請輸入正確的聯絡電話')); return; }
+  const e=document.getElementById('bEmail'), m=document.getElementById('bMemo');
+  BOOK.payer={name:n, phone:p, email:e?e.value.trim():'', memo:m?m.value.trim():''};
+  if(!BOOK.depositor) BOOK.depositor = n;
+  BOOK.q = quote() || BOOK.q;
   renderBookStep(2);
 }
 
@@ -1020,8 +1194,7 @@ async function finishBooking(method){
   }
   ST.reservations.unshift(rec); saveAll();
   closeModal('pgModal');
-  renderBookStep(3);
-  setStep(3);
+  setStep(2);
   const payLabel = method==='bank' ? (L('계좌이체','Bank transfer','銀行轉帳')+' · '+L('입금자 ','from ','匯款人 ')+esc(BOOK.depositor))
     : method==='paypal' ? 'PayPal'
     : (BOOK.card.company+(BOOK.card.installment&&BOOK.card.installment!=='-'?' · '+instLabel(BOOK.card.installment):''));
@@ -1048,7 +1221,7 @@ async function finishBooking(method){
   ST.in=null; ST.out=null;
   renderCals(); renderQuote(); syncSearch();
 }
-function closeBooking(){ closeModal('bookModal'); closeModal('pgModal'); ST.in=null; ST.out=null; renderCals(); renderQuote(); }
+function closeBooking(){ captureBookInputs(); closeModal('bookModal'); closeModal('pgModal'); renderCals(); renderQuote(); }
 
 /* ── my reservations ── */
 function openMine(){

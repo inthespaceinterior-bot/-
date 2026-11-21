@@ -26,7 +26,7 @@
       <a href="#reviews">후기</a>
       <a href="#location">위치·이용안내</a>
     </nav>
-    <button class="btn gold head-cta" onclick="goBook()">예약하기</button>
+    <button class="btn gold head-cta" onclick="barBooking()">예약하기</button>
     <button class="btn light" onclick="openMine()">내 예약</button>
     <button class="btn light" onclick="openHost()">호스트</button>
     <div class="lang-sw" role="group" aria-label="Language">
@@ -241,7 +241,15 @@
   <div class="wrap">
     <div class="eyebrow">Reservation</div>
     <h2 style="font-size:32px;margin:10px 0 8px">날짜를 고르면 요금이 바로 계산됩니다</h2>
-    <p style="color:var(--muted);font-size:13.5px;margin:0 0 26px">요금·마감 상태는 네이버 예약 달력에서 2026-11-21 기준으로 확인한 실제 값입니다.</p>
+    <p style="color:var(--muted);font-size:13.5px;margin:0 0 20px">요금·마감 상태는 네이버 예약 달력에서 2026-11-21 기준으로 확인한 실제 값입니다.</p>
+    <div class="quickpick">
+      <div class="qp-head">
+        <b>예약 가능한 날짜 바로 선택</b>
+        <span>한 번만 누르면 체크인·체크아웃과 요금이 세팅됩니다</span>
+      </div>
+      <div class="qp-chips" id="qpChips" data-dyn></div>
+      <div class="qp-note">마감·차단된 날짜는 자동으로 빠집니다 · 실제 예약 가능 여부는 서버와 실시간으로 맞춰집니다</div>
+    </div>
     <div class="book-grid">
       <div>
         <div class="cal-toolbar">
@@ -399,10 +407,9 @@
   <div class="veil" onclick="closeBooking()"></div>
   <div class="sheet">
     <div class="sheet-head"><h3>예약 진행</h3><button class="x" onclick="closeBooking()">✕</button></div>
-    <div class="steps">
+    <div class="steps two-step">
       <div class="on" id="st1">01 예약 정보</div>
-      <div id="st2">02 결제 수단</div>
-      <div id="st3">03 완료</div>
+      <div id="st2">02 결제·완료</div>
     </div>
     <div class="pane" id="bkPane" data-dyn></div>
   </div>
@@ -436,6 +443,16 @@
       <button onclick="hostTab('guide',this)">연동 가이드</button>
     </div>
     <div class="hp" id="hostBody" data-dyn></div>
+  </div>
+</div>
+
+<div class="bookbar" id="bookBar">
+  <div class="bb-inner">
+    <div class="bb-info">
+      <div class="bb-price"><b id="bbPrice">500,000원~</b><span id="bbPer">/ 1박</span></div>
+      <div class="bb-sub" id="bbSub">가장 빠른 체크인 11월 26일 (목)</div>
+    </div>
+    <button class="btn gold bb-btn" id="bbBtn" onclick="barBooking()">바로 예약하기</button>
   </div>
 </div>
 
