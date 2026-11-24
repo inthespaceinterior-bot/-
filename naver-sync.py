@@ -71,16 +71,29 @@ def scrape(days=180, verbose=False):
     days_map = {}
     cur = today
     end_all = today + datetime.timedelta(days=days)
+    last_err = None
     while cur <= end_all:
         chunk_end = min(cur + datetime.timedelta(days=14), end_all)
-        try:
-            data = fetch(cur, chunk_end)
-        except Exception as e:
-            print('WARN request failed', cur, chunk_end, type(e).__name__, e, file=sys.stderr)
-            cur = chunk_end + datetime.timedelta(days=1)
-            time.sleep(1.0)
-            continue
-        daily = (((data or {}).get('data') or {}).get('schedule') or {}).get('bizItemSchedule', {}).get('daily', {}).get('date', {})
+        data = None
+        for attempt in range(2):
+            try:
+                data = fetch(cur, chunk_end)
+            except Exception as e:
+                last_err = f'{type(e).__name__}: {e}'
+                print('WARN request failed', cur, chunk_end, last_err, file=sys.stderr)
+                time.sleep(1.5)
+                continue
+            errs = (data or {}).get('errors') or []
+            if errs:
+                msg = errs[0].get('message') or str(errs[0])
+                last_err = msg
+                if 'TooManyRequests' in msg and attempt == 0:
+                    time.sleep(3.0)
+                    continue
+                raise RuntimeError(f'naver graphql error ({cur}..{chunk_end}): {msg}')
+            break
+        bis = (((data or {}).get('data') or {}).get('schedule') or {}).get('bizItemSchedule') or {}
+        daily = (bis.get('daily') or {}).get('date') or {}
         for k, s in daily.items():
             price = None
             prices = s.get('prices') or []
@@ -90,7 +103,9 @@ def scrape(days=180, verbose=False):
             if verbose:
                 print(k, days_map[k], 'sale', s.get('isSaleDay'), 'stock', s.get('stock'), 'booked', s.get('bookingCount'))
         cur = chunk_end + datetime.timedelta(days=1)
-        time.sleep(0.3)
+        time.sleep(0.8)
+    if not days_map and last_err:
+        raise RuntimeError(last_err)
     last_open = max([d for d, v in days_map.items() if v[1] == 'open'], default=None)
     out = {
         "source": PAGE,

@@ -1,18 +1,10 @@
 {
  "source": "https://m.booking.naver.com/booking/3/bizes/842506/items/4858363",
  "api": "m.booking.naver.com/graphql opName=schedule",
- "updatedAt": "2026-11-22T09:46:08+09:00",
+ "updatedAt": "2026-11-24T16:47:39+09:00",
  "timezone": "Asia/Seoul",
  "openUntil": "2027-01-31",
  "days": {
-  "2026-11-22": [
-   700000,
-   "closed"
-  ],
-  "2026-11-23": [
-   600000,
-   "closed"
-  ],
   "2026-11-24": [
    500000,
    "closed"
@@ -138,12 +130,12 @@
    "closed"
   ],
   "2026-12-25": [
-   null,
-   "sold"
+   1400000,
+   "open"
   ],
   "2026-12-26": [
-   null,
-   "sold"
+   1400000,
+   "open"
   ],
   "2026-12-27": [
    700000,
@@ -426,6 +418,14 @@
    "sold"
   ],
   "2027-03-07": [
+   null,
+   "sold"
+  ],
+  "2027-03-08": [
+   null,
+   "sold"
+  ],
+  "2027-03-09": [
    null,
    "sold"
   ]
