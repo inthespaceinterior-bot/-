@@ -75,20 +75,20 @@ def scrape(days=180, verbose=False):
     while cur <= end_all:
         chunk_end = min(cur + datetime.timedelta(days=14), end_all)
         data = None
-        for attempt in range(2):
+        for attempt in range(4):
             try:
                 data = fetch(cur, chunk_end)
             except Exception as e:
                 last_err = f'{type(e).__name__}: {e}'
                 print('WARN request failed', cur, chunk_end, last_err, file=sys.stderr)
-                time.sleep(1.5)
+                time.sleep(2.0 * (attempt + 1))
                 continue
             errs = (data or {}).get('errors') or []
             if errs:
                 msg = errs[0].get('message') or str(errs[0])
                 last_err = msg
-                if 'TooManyRequests' in msg and attempt == 0:
-                    time.sleep(3.0)
+                if 'TooManyRequests' in msg and attempt < 3:
+                    time.sleep(5.0 * (attempt + 1))
                     continue
                 raise RuntimeError(f'naver graphql error ({cur}..{chunk_end}): {msg}')
             break
@@ -103,7 +103,7 @@ def scrape(days=180, verbose=False):
             if verbose:
                 print(k, days_map[k], 'sale', s.get('isSaleDay'), 'stock', s.get('stock'), 'booked', s.get('bookingCount'))
         cur = chunk_end + datetime.timedelta(days=1)
-        time.sleep(0.8)
+        time.sleep(2.0)
     if not days_map and last_err:
         raise RuntimeError(last_err)
     last_open = max([d for d, v in days_map.items() if v[1] == 'open'], default=None)
